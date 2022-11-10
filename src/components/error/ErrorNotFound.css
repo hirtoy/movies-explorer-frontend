@@ -24,7 +24,7 @@
   color: #fff;
   font-weight: 400;
   font-size: 140px;
-  line-height: 1.21;
+  line-height: 169.43px;
 }
 
 @media screen and (max-width: 1280px) {
@@ -73,6 +73,6 @@
   .not-found__back-link {
     font-size: 12px;
     line-height: 1.25;
-    margin-bottom: 30px;
+    margin-bottom: 222px;
   }
 }

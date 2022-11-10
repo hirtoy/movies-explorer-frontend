@@ -23,7 +23,8 @@
 }
 
 .footer__line {
-    border-bottom: 1px solid #424242;;
+    border-bottom: 1px solid #424242;
+    max-width: 1140px;
 }
 
 .footer__link-item {
