@@ -17,7 +17,7 @@ export default function Profile() {
 
     return (
         <div className="profile">
-            <h1 className="profile__title">Привет, Василий!</h1>
+            <h1 className="profile__title">Привет, Виталий!</h1>
             <form className="profile__form" method="post" name="profileForm"
                 noValidate>
 
@@ -25,7 +25,7 @@ export default function Profile() {
 
                     <label className="profile__form-input-title">Имя</label>
 
-                    <input value={name || 'Василий'}
+                    <input value={name || 'Виталий'}
                         onChange={handleChangeName}
                         name="name"
                         type="text"
