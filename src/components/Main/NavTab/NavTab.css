@@ -1,0 +1,136 @@
+.navtab {
+    position: fixed;
+    z-index: 5;
+    color: #000;
+    background: rgba(0, 0, 0, 0.6);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.5s, opacity 0.5s linear;
+    display: none;
+}
+
+@media screen and (max-width: 1023px) {
+    .navtab {
+        display: inherit;
+    }
+}
+
+.navtab__container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 1024px;
+    width: 520px;
+    background-color: #202020;
+    margin-left: auto;
+}
+
+@media screen and (max-width: 767px) {
+    .navtab__container {
+        width: 100%;
+        max-height: 854px;
+    }
+}
+
+.navtab__link {
+    color: #fff;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.22;
+    text-decoration: none;
+}
+
+.navtab__link:hover {
+    opacity: .6;
+}
+
+.navtab__link-item {
+    list-style-type: none;
+}
+
+.navtab__link-item:not(:last-child) {
+    margin-bottom: 28px;
+}
+
+@media screen and (max-width: 767px) {
+    .navtab__link-item:not(:last-child) {
+        margin-bottom: 24px;
+    }
+}
+
+.navtab__link_underline {
+    border-bottom: 2px solid #fff;
+}
+
+.navtab__links {
+    margin: 159px auto auto auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.navtab__profile {
+    display: flex;
+    border: 2px solid rgba(170, 170, 170, .2);
+    border-radius: 50px;
+    box-sizing: border-box;
+    cursor: pointer;
+    text-decoration: none;
+    margin-bottom: 90px;
+}
+
+.navtab__profile:hover {
+    opacity: .6;
+}
+
+@media screen and (max-width: 767px) {
+    .navtab__profile {
+        margin-bottom: 46px;
+    }
+}
+
+.navtab_opened {
+    visibility: visible;
+    opacity: 1;
+}
+
+.navtab__close-button {
+    position: absolute;
+    right: 22px;
+    top: 22px;
+    cursor: pointer;
+    border: 0;
+    background: 0;  
+    height: 22px;
+    width: 22px;
+}
+
+.navtab__close-button:hover {
+    opacity: 0.6;
+}
+
+.navtab__close-button:before {
+    position: absolute;
+    content: '';
+    height: 22px;
+    border: 2px solid #fff;
+    top: 0;
+    transform: rotate(45deg);
+    background-color: #fff;
+}
+
+.navtab__close-button:after {
+    position: absolute;
+    content: '';
+    height: 22px;
+    border: 2px solid #fff;
+    top: 0;
+    transform: rotate(-45deg);
+    background-color: #fff;
+}

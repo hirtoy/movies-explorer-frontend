@@ -1,0 +1,36 @@
+.login-header {
+    display: flex;
+    flex-direction: column;
+    padding-top: 70px;
+    margin: 0 0 40px 0;
+    max-width: 396px;
+}
+
+@media screen and (max-width: 1280px) {
+    .login-header {
+        padding-top: 232px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .login-header {
+        padding-top: 56px;
+        align-items: center;
+        margin: 0 auto 80px auto;
+    }
+}
+
+.login-header__title {
+    color: #fff;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.21;
+    margin-top: 40px;
+    margin-bottom: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .header__logo_login-header {
+        margin-top: 50px;
+    }
+}

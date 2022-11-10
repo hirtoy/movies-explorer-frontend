@@ -1,0 +1,129 @@
+.profile {
+    min-height: 700px;
+    background-color: #202020;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 1280px) {
+    .profile {
+        min-height: 1024px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .profile {
+        min-height: 780px;
+    }
+}
+
+.profile__title {
+    margin: 74px auto 0 auto;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.21;
+    color: #fff;
+}
+
+@media screen and (max-width: 1280px) {
+    .profile__title {
+        margin: 236px auto 0 auto;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .profile__title {
+        margin: 70px auto 0 auto;
+    }
+}
+
+.profile__logout {
+    color: #EE3465;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 1.23;
+}
+
+.profile__logout:hover {
+    opacity: .6;
+}
+
+.profile__form {
+    margin: 123px auto 0 auto;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    min-width: 410px;
+    align-items: center;
+}
+
+@media screen and (max-width: 1280px) {
+    .profile__form {
+        margin: 96px auto 0 auto;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .profile__form {
+        margin: 80px auto 0 auto;
+        min-width: 260px;
+    }
+}
+
+.profile__form-submit-btn {
+    margin: 220px auto 16px auto;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.23;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    background: none;
+}
+
+.profile__form-submit-btn:hover {
+    opacity: .6;
+}
+
+@media screen and (max-width: 1280px) {
+    .profile__form-submit-btn {
+        margin: 210px auto 16px auto;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .profile__form-submit-btn {
+        margin: 379px auto 16px auto;
+    }
+}
+
+.profile__form-line {
+    border-bottom: 1px solid #424242;
+    width: 100%;
+    margin: 16px 0 17px 0;
+}
+
+.profile__form-input {
+    border: unset;
+    outline: 0;
+    text-align: right;
+    background: none;
+    color: #fff;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 1.18;
+}
+
+.profile__form-input-title {
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 1.18;
+}
+
+.profile__form-input-item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,0 +1,41 @@
+.login-footer {
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (max-width: 768px) {
+    .login-footer {
+        padding-bottom: 30px;
+    }
+}
+
+.login-footer__title {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.21;
+    color: #8B8B8B;
+    margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .login-footer__title {
+        font-size: 12px;
+        line-height: 1.25;
+    }
+}
+
+.login-footer__link {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.21;
+    color: #4285F4;
+    text-decoration: none;
+    margin-left: 8px;
+}
+
+@media screen and (max-width: 768px) {
+    .login-footer__link {
+        font-size: 12px;
+        line-height: 1.25;
+    }
+}
