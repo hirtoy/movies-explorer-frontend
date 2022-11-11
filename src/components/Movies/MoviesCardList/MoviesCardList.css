@@ -11,8 +11,8 @@
 
 @media screen and (max-width: 768px) {
   .movie-list {
-    max-width: 300px;
-    max-height: 271px;
+    max-width: 342px;
+    max-height: 309px;
   }
 }
 
@@ -26,8 +26,8 @@
 
 @media screen and (max-width: 768px) {
   .movie-list__image {
-    max-width: 300px;
-    max-height: 168px;
+    max-width: 342px;
+    max-height: 190px;
   }
 }
 
@@ -81,10 +81,10 @@
 }
 
 .movie-list__like-button-item {
-    min-height: 65px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  min-height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .movie-list__like-button:hover {

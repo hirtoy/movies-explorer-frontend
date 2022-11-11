@@ -7,7 +7,7 @@ export default function SearchForm() {
             <form className="searchform__items">
                 <label className="searchform__input-item">
                     <input type="text" className="searchform__input" placeholder="Фильм" required></input>
-                    <button type="button" className="searchform__input-submit">Поиск</button>
+                    <button type="submit" className="searchform__input-submit">Поиск</button>
                 </label>
                 <div className="searchform__checkbox-group">
                     <label className="searchform__checkbox-item">

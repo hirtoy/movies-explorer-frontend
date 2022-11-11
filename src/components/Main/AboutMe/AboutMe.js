@@ -12,7 +12,7 @@ export default function AboutMe() {
                     <p className="aboutme__info-name">Валерия</p>
                     <p className="aboutme__info-task">Фронтенд-разработчик, 22 года</p>
                     <p className="aboutme__info-about">Мое первое знакомство с программированием произошло в 2012 году по игре в minecraft, там я создавала мобов написанием их на языку Java, сейчас изучаю Java-script.</p>
-                    <a target="_blank" href="https://github.com/hiroy/movies-explorer-frontend"
+                    <a target="_blank" href="https://github.com/hirtoy/movies-explorer-frontend"
                        className="aboutme__info-github" rel="noreferrer">Github</a>
                 </div>
                 <img alt="Студент Воробьева В.В." className="aboutme__image" src={avatar}/>
