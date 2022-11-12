@@ -1,0 +1,108 @@
+.movie-list {
+  background: #222222;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  max-width: 360px;
+  max-height: 319px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .movie-list {
+    max-width: 342px;
+    max-height: 309px;
+  }
+}
+
+.movie-list__image {
+  max-width: 360px;
+  max-height: 200px;
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+@media screen and (max-width: 768px) {
+  .movie-list__image {
+    max-width: 342px;
+    max-height: 190px;
+  }
+}
+
+.movie-list__title {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  max-height: 54px;
+}
+
+.movie-list__title-text {
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 1.2;
+  color: #fff;
+  margin: 18px auto 18px 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 240px;
+}
+
+@media screen and (max-width: 767px) {
+  .movie-list__title-text {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+}
+
+.movie-list__title-duration {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.38;
+  color: #8b8b8b;
+  margin: 18px 18px 18px auto;
+}
+
+@media screen and (max-width: 767px) {
+  .movie-list__title-duration {
+    font-size: 10px;
+    line-height: 1.8;
+  }
+}
+
+.movie-list__like-button {
+  border-radius: 30px;
+  width: 100px;
+  height: 29px;
+  border: none;
+  cursor: pointer;
+}
+
+.movie-list__like-button-item {
+  min-height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.movie-list__like-button:hover {
+  opacity: 0.6;
+}
+
+.movie-list__like-button-unliked {
+  background: #313131;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 0.91;
+  color: #fff;
+}
+
+.movie-list__like-button-liked {
+  background: #ee3465 no-repeat center url(../../../images/ok.png);
+}
+
+.movie-list__like-button-delete {
+  background: #313131 no-repeat center url(../../../images/delete.svg);
+}

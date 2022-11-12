@@ -1,0 +1,25 @@
+.login-submit {
+    background: #4285F4;
+    border-radius: 3px;
+    border: unset;
+    outline: 0;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.21;
+    color: #FFFFFF;
+    height: 45px;
+    margin: auto auto 16px auto;
+    width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    .login-submit {
+        margin: 157px auto 16px auto;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .login-submit_auth {
+        margin: 237px auto 16px auto;
+    }
+}
