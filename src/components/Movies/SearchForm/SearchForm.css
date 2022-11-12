@@ -88,6 +88,13 @@
   height: 72px;
 }
 
+@media screen and (max-width: 768px) {
+  .searchform__input-submit {
+    max-width: 708px;
+    max-height: 72px;
+  }
+}
+
 .searchform_input-item:focus-within {
   outline: inset;
 }
