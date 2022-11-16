@@ -102,7 +102,7 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-    baseUrl: 'https://api.hirtoy.nomoredomains.icu/',
+    baseUrl: 'https://api.hirtoy.nomoredomains.icu',
     headers: {
         'Content-Type': 'application/json',
       },
