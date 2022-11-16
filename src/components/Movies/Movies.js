@@ -1,16 +1,23 @@
 import React from 'react';
 import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList';
 import './Movies.css';
+import { ERROR_NOT_FOUND, ERROR_SERVER } from '../../utils/Constants';
 
-export default function Movies({ movies, isMovies }) {
+export default function Movies({ movies, isMovies, isLoading, isNotFound, isServerError, onMore, sortingMovies, like, savedMovies }) {
     return (
         <section className="movies">
+            {!isLoading && isNotFound ?
+                <p className="movies__items-none">{ERROR_NOT_FOUND}</p> : ''}
+            {!isLoading && isServerError ?
+                <p className="movies__items-none">{ERROR_SERVER}</p> : ''}
             <div className="movies__item">
-                {movies.map(item => <MoviesCardList key={item.id} movie={item} isMovies={isMovies} />)}
+                {movies.map(item => <MoviesCardList key={item.id} movie={item} isMovies={isMovies} like={like}
+                    saved={savedMovies.some((m) => item.id === +m.movieId)} />)}
             </div>
-            <div className="movies__more-item">
-                <button type="button" className="movies__more">Ещё</button>
-            </div>
+            {!isLoading && movies.length < sortingMovies.length ?
+                <div className="movies__more-item">
+                    <button type="button" className="movies__more" onClick={onMore}>Ещё</button>
+                </div> : ''}
         </section>
     )
 }

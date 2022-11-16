@@ -3,11 +3,11 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import './MoviesCard.css';
 import '../Movies.css';
 
-export default function MoviesCard({ movies, isMovies }) {
+export default function MoviesCard({ movies, isMovies, like }) {
     return (
         <section className="movies-card">
             <div className="movies__item">
-            {movies.map(item => <MoviesCardList key={item.id} movie={item} isMovies={isMovies} />)}
+            {movies.map(item => <MoviesCardList key={item.id} movie={item} isMovies={isMovies} like={like}/>)}
             </div>
         </section>
     )
