@@ -17,7 +17,7 @@ import ErrorNotFound from '../error/ErrorNotFound';
 import NavTab from '../Main/NavTab/NavTab';
 import RedirectPage from '../RedirectPage/RedirectPage';
 import ProtectedRoute from '../Route/ProtectedRoute'
-import mainApi from '../../Api/MainApi';
+import { mainApi } from '../../Api/MainApi';
 import { moviesApi } from '../../Api/MoviesApi';
 // import MoviesCard from '../Movies/MoviesCard/MoviesCard';
 // import Profile from '../Profile/Profile';
@@ -276,7 +276,7 @@ export default function App() {
         localStorage.removeItem('allMovies');
         localStorage.removeItem('sortingMovies');
         localStorage.removeItem('isRenderedMovies');
-        localStorage.removeItem('searchQuery');
+        localStorage.removeItem('searchRequest');
         localStorage.removeItem('shortFilms');
     }
 
@@ -301,7 +301,7 @@ export default function App() {
                         searchMovies={handleSearchMovies}
                         isNotFound={isNotFound}
                         isServerError={isServerError}
-                        loadMore={handleLoadMore}
+                        onMore={handleLoadMore}
                         like={handleLike}
                         resMoviesCard={resMoviesCard} />
                     <ProtectedRoute path="/saved-movies"

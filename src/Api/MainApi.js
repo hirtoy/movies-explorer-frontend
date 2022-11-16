@@ -101,11 +101,10 @@ class MainApi {
     }
 }
 
-const mainApi = new MainApi({
+export const mainApi = new MainApi({
     baseUrl: 'https://api.hirtoy.nomoredomains.icu',
     headers: {
         'Content-Type': 'application/json',
       },
       credentials: 'include',
 });
-export default mainApi;
