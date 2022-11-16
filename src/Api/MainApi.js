@@ -1,17 +1,17 @@
 import Cookies from 'js-cookie';
 
 class MainApi {
-    constructor(options) {
-        this._headers = options.headers;
-        this._url = options.baseUrl;
+    constructor({ baseUrl, headers }) {
+        this._headers = headers;
+        this._baseUrl = baseUrl;
     }
 
     getUserInfo(token) {
         return Promise.all([this.checkAuthorize(token), this.getUserMovies()]);
     }
 
-    register(name, email, password) {
-        return fetch(`${this._url}/signup`, {
+    register({ name, password, email }) {
+        return fetch(`${this._baseUrl}/signup`, {
             method: 'POST',
             headers: this.headers,
             body: JSON.stringify({ name, email, password })
@@ -19,8 +19,8 @@ class MainApi {
             .then(res => this._getResponseData(res));
     }
 
-    authorize(email, password) {
-        return fetch(`${this._url}/signin`, {
+    authorize({ email, password }) {
+        return fetch(`${this._baseUrl}/signin`, {
             method: 'POST',
             headers: this.headers,
             credentials: 'include',
@@ -30,7 +30,7 @@ class MainApi {
     }
 
     getUserMovies() {
-        return fetch(`${this._url}/movies`, {
+        return fetch(`${this._baseUrl}/movies`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${Cookies.get('jwt')}`,
@@ -41,7 +41,7 @@ class MainApi {
     }
 
     checkAuthorize() {
-        return fetch(`${this._url}/users/me`, {
+        return fetch(`${this._baseUrl}/users/me`, {
             method: 'GET',
             credentials: 'include',
             headers: {
@@ -53,7 +53,7 @@ class MainApi {
     }
 
     setUserData(data) {
-        return fetch(`${this._url}/users/me`, {
+        return fetch(`${this._baseUrl}/users/me`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ class MainApi {
     }
 
     addMovie(movie) {
-        return fetch(`${this._url}/movies`, {
+        return fetch(`${this._baseUrl}/movies`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ class MainApi {
     }
 
     deleteMovie(movieId) {
-        return fetch(`${this._url}/movies/` + movieId, {
+        return fetch(`${this._baseUrl}/movies/${movieId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
