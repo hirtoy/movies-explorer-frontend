@@ -18,12 +18,13 @@ export default function Register({ onRegister }) {
     const { register, handleSubmit,
         formState: { errors, isValid } } = useForm({ mode: "onChange" });
     const onSubmit = (data) => {
-        onRegister(data).catch((err) => {
-            console.log(err);
-            if (err === 'Ошибка: 409') {
-                setMessage('Такой пользователь уже существует');
-            }
-        })
+        onRegister(data)
+            .catch((err) => {
+                console.log(err);
+                if (err === 'Ошибка: 409') {
+                    setMessage('Такой пользователь уже существует');
+                }
+            })
         setTimeout(() => setMessage(''), 3000);
     }
 
@@ -43,7 +44,7 @@ export default function Register({ onRegister }) {
                     <input type="text"
                         placeholder="Имя"
                         className={`register_form-filed-input ${errors?.name && 'register_form-filed-input_failed-validation'}`}
-                        minLength="2" maxLength="30" id={`redact-name-input`}
+                        minLength="2" maxLength="30" id={`profile-name-input`}
                         required
                         {...register('name', {
                             required: 'Поле обязательно к заполнению',
@@ -56,7 +57,7 @@ export default function Register({ onRegister }) {
                     <input type="email"
                         placeholder="pochta@yandex.ru"
                         className={`register_form-filed-input ${errors?.email && 'register_form-filed-input_failed-validation'}`}
-                        minLength="2" maxLength="30" id={`redact-email-input`}
+                        minLength="2" maxLength="30" id={`profile-email-input`}
                         required
                         {...register('email', {
                             required: 'Поле обязательно к заполнению',
@@ -69,7 +70,7 @@ export default function Register({ onRegister }) {
                     <input type="password"
                         placeholder=""
                         className={`register_form-filed-input ${errors?.password && 'register_form-filed-input_failed-validation'}`}
-                        minLength="2" maxLength="30" id={`redact-password-input`}
+                        minLength="2" maxLength="30" id={`profile-password-input`}
                         required
                         {...register('password', {
                             required: 'Поле обязательно к заполнению',

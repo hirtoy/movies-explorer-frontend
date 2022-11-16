@@ -44,7 +44,7 @@ export default function Login({ onLogin }) {
                     <input type="email"
                         placeholder="pochta@yandex.ru"
                         className={`register_form-filed-input ${errors?.email && 'register_form-filed-input_failed-validation'}`}
-                        minLength="2" maxLength="30" id={`redact-email-input`}
+                        minLength="2" maxLength="30" id={`profile-email-input`}
                         required
                         {...register('email', {
                             required: 'Поле обязательно к заполнению', pattern: {
@@ -59,7 +59,7 @@ export default function Login({ onLogin }) {
                     <input type="password"
                         placeholder=""
                         className={`register_form-filed-input ${errors?.password && 'register_form-filed-input_failed-validation'}`}
-                        minLength="2" maxLength="30" id={`redact-password-input`}
+                        minLength="2" maxLength="30" id={`profile-password-input`}
                         required
                         {...register('password', {
                             required: 'Поле обязательно к заполнению', minLength: {

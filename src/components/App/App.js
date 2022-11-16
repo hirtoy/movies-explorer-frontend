@@ -285,7 +285,7 @@ export default function App() {
             <div className="app">
                 <Switch>
                     <Route exact path="/">
-                        <Header loggedIn={false} aboutPage={true} onClick={handleClick} />
+                        <Header loggedIn={false} aboutPage={true} onMenuClick={handleClick} />
                         <Main />
                     </Route>
 
