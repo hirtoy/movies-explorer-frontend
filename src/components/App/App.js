@@ -294,7 +294,7 @@ export default function App() {
                         movies={isRenderMovies}
                         sortingMovies={sortingMovies}
                         savedMovies={savedMovies}
-                        isUserMovies={false}
+                        isMovies={false}
                         component={MoviesPage}
                         isLoading={isLoading}
                         onMenuClick={handleClick}
