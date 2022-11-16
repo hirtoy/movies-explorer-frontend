@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useForm} from "react-hook-form";
-import {CurrentUserContext} from "../../contexts/CurrentUserContext";
+import {CurrentUserContext} from '../../contexts/CurrentUserContext';
 import {useHistory} from "react-router-dom";
 import LoginHeader from '../Login/form/LoginHeader/LoginHeader';
 // import LoginForm from '../Login/form/LoginForm/LoginForm';
@@ -31,6 +31,7 @@ export default function Register({onRegister}) {
             history.push('/');
         }
     }, [history, user]);
+
     return (
         <div className="register">
             <LoginHeader title={'Добро пожаловать!'}/>

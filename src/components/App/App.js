@@ -304,6 +304,7 @@ export default function App() {
                         onMore={handleLoadMore}
                         like={handleLike}
                         resMoviesCard={resMoviesCard} />
+
                     <ProtectedRoute path="/saved-movies"
                         loggedIn={localStorage.getItem('loggedIn') === 'true'}
                         movies={savedMovies}
