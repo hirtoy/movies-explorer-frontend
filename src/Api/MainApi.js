@@ -2,9 +2,7 @@ import Cookies from 'js-cookie';
 
 class MainApi {
     constructor(options) {
-        this.headers = {
-            'Content-Type': 'application/json'
-        }
+        this._headers = options.headers;
         this._url = options.baseUrl;
     }
 
@@ -16,8 +14,9 @@ class MainApi {
         return fetch(`${this._url}/signup`, {
             method: 'POST',
             headers: this.headers,
-            body: JSON.stringify({name, email, password})
-        }).then(res => this._getResponseData(res));
+            body: JSON.stringify({ name, email, password })
+        })
+            .then(res => this._getResponseData(res));
     }
 
     authorize(email, password) {
@@ -25,8 +24,9 @@ class MainApi {
             method: 'POST',
             headers: this.headers,
             credentials: 'include',
-            body: JSON.stringify({email, password})
-        }).then(res => this._getResponseData(res));
+            body: JSON.stringify({ email, password })
+        })
+            .then(res => this._getResponseData(res));
     }
 
     getUserMovies() {
@@ -36,7 +36,8 @@ class MainApi {
                 'Authorization': `Bearer ${Cookies.get('jwt')}`,
             },
             credentials: 'include',
-        }).then(res => this._getResponseData(res))
+        })
+            .then(res => this._getResponseData(res))
     }
 
     checkAuthorize() {
@@ -47,7 +48,8 @@ class MainApi {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${Cookies.get('jwt')}`,
             },
-        }).then(res => this._getResponseData(res));
+        })
+            .then(res => this._getResponseData(res));
     }
 
     setUserData(data) {
@@ -62,7 +64,8 @@ class MainApi {
                 name: data.name,
                 email: data.email
             })
-        }).then(res => this._getResponseData(res));
+        })
+            .then(res => this._getResponseData(res));
     }
 
     addMovie(movie) {
@@ -74,7 +77,8 @@ class MainApi {
             },
             credentials: 'include',
             body: JSON.stringify(movie)
-        }).then(res => this._getResponseData(res));
+        })
+            .then(res => this._getResponseData(res));
     }
 
     deleteMovie(movieId) {
@@ -85,7 +89,8 @@ class MainApi {
                 'Authorization': `Bearer ${Cookies.get('jwt')}`,
             },
             credentials: 'include',
-        }).then(res => this._getResponseData(res));
+        })
+            .then(res => this._getResponseData(res));
     }
 
     _getResponseData(res) {
@@ -98,5 +103,9 @@ class MainApi {
 
 const mainApi = new MainApi({
     baseUrl: 'https://api.hirtoy.nomoredomains.icu',
+    headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
 });
 export default mainApi;
