@@ -1,8 +1,10 @@
 import Cookies from 'js-cookie';
 
 class MainApi {
-    constructor({ baseUrl, headers }) {
-        this._headers = headers;
+    constructor(baseUrl) {
+        this.headers = {
+            'Content-Type': 'application/json'
+        }
         this._baseUrl = baseUrl;
     }
 
@@ -10,55 +12,51 @@ class MainApi {
         return Promise.all([this.checkAuthorize(token), this.getUserMovies()]);
     }
 
-    register({ name, password, email }) {
-        return fetch(`${this._baseUrl}/signup`, {
+    register(name, email, password) {
+        this.url = this._baseUrl + 'signup';
+        return fetch(this.url, {
             method: 'POST',
             headers: this.headers,
-            credentials: 'include',
-            body: JSON.stringify({
-                name,
-                password,
-                email,
-            }),
-        })
-            .then(res => this._getResponseData(res));
+            body: JSON.stringify({name, email, password})
+        }).then(res => this._getResponseData(res));
     }
 
-    authorize({ email, password }) {
-        return fetch(`${this._baseUrl}/signin`, {
+    authorize(email, password) {
+        this.url = this._baseUrl + 'signin';
+        return fetch(this.url, {
             method: 'POST',
             headers: this.headers,
             credentials: 'include',
-            body: JSON.stringify({ email, password })
-        })
-            .then(res => this._getResponseData(res));
+            body: JSON.stringify({email, password})
+        }).then(res => this._getResponseData(res));
     }
 
     getUserMovies() {
-        return fetch(`${this._baseUrl}/movies`, {
+        this.url = this._baseUrl + 'movies';
+        return fetch(this.url, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${Cookies.get('jwt')}`,
             },
             credentials: 'include',
-        })
-            .then(res => this._getResponseData(res))
+        }).then(res => this._getResponseData(res))
     }
 
     checkAuthorize() {
-        return fetch(`${this._baseUrl}/users/me`, {
+        this.url = this._baseUrl + 'users/me';
+        return fetch(this.url, {
             method: 'GET',
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${Cookies.get('jwt')}`,
             },
-        })
-            .then(res => this._getResponseData(res));
+        }).then(res => this._getResponseData(res));
     }
 
     setUserData(data) {
-        return fetch(`${this._baseUrl}/users/me`, {
+        this.url = this._baseUrl + 'users/me';
+        return fetch(this.url, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -69,12 +67,12 @@ class MainApi {
                 name: data.name,
                 email: data.email
             })
-        })
-            .then(res => this._getResponseData(res));
+        }).then(res => this._getResponseData(res));
     }
 
     addMovie(movie) {
-        return fetch(`${this._baseUrl}/movies`, {
+        this.url = this._baseUrl + 'movies';
+        return fetch(this.url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -82,20 +80,19 @@ class MainApi {
             },
             credentials: 'include',
             body: JSON.stringify(movie)
-        })
-            .then(res => this._getResponseData(res));
+        }).then(res => this._getResponseData(res));
     }
 
     deleteMovie(movieId) {
-        return fetch(`${this._baseUrl}/movies/${movieId}`, {
+        this.url = this._baseUrl + 'movies/' + movieId;
+        return fetch(this.url, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${Cookies.get('jwt')}`,
             },
             credentials: 'include',
-        })
-            .then(res => this._getResponseData(res));
+        }).then(res => this._getResponseData(res));
     }
 
     _getResponseData(res) {
@@ -106,10 +103,4 @@ class MainApi {
     }
 }
 
-export const mainApi = new MainApi({
-    baseUrl: 'https://api.hirtoy.nomoredomains.icu',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    credentials: 'include',
-});
+export const mainApi = new MainApi('https://api.hirtoy.nomoredomains.icu/');
