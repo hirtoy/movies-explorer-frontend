@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
@@ -10,7 +11,7 @@ import LoginFooter from '../Login/form/LoginFooter/LoginFooter';
 // import '../Login/form/LoginHeader/LoginHeader.css';
 import './Register.css';
 
-export default function Register({ onRegister }) {
+export default function Register({ onRegister, errorMessage }) {
     const [message, setMessage] = useState('');
     const user = React.useContext(CurrentUserContext);
     const history = useHistory();
@@ -25,14 +26,13 @@ export default function Register({ onRegister }) {
                     setMessage('Такой пользователь уже существует');
                 }
             })
-        setTimeout(() => setMessage(''), 3000);
     }
 
     useEffect(() => {
         if (Object.keys(user).length !== 0) {
             history.push('/');
         }
-    }, [history, user]);
+    }, [user]);
 
     return (
         <div className="register">
@@ -52,6 +52,7 @@ export default function Register({ onRegister }) {
                         })} />
                     {errors?.name && <span className="register_form-filed-input-error">{errors?.name?.message}</span>}
                 </div>
+                
                 <div className="register_form-filed">
                     <label className="register_form-filed-input-title">E-mail</label>
                     <input type="email"
@@ -63,8 +64,10 @@ export default function Register({ onRegister }) {
                             required: 'Поле обязательно к заполнению',
                             pattern: { value: /[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+/, message: 'Неправильный формат email' }
                         })} />
-                    {errors?.email && <span className="register_form-filed-input-error">{errors?.email?.message}</span>}
+                    {errors?.email && 
+                    <span className="register_form-filed-input-error">{errors?.email?.message}</span>}
                 </div>
+                
                 <div className="register_form-filed">
                     <label className="register_form-filed-input-title">Пароль</label>
                     <input type="password"
@@ -79,6 +82,7 @@ export default function Register({ onRegister }) {
                     {errors?.password &&
                         <span className="register_form-filed-input-error">{errors?.password?.message}</span>}
                 </div>
+
                 <div className="register_form-submit__item">
                     <span className="register_form-filed-input-error">{message}</span>
                     <button type="submit" className="register_form-submit" disabled={!isValid}>

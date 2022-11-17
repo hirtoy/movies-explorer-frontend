@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -32,13 +33,16 @@ export default function Login({ onLogin }) {
         if (Object.keys(user).length !== 0) {
             history.push('/');
         }
-    }, [history, user]);
+    }, [user]);
 
     return (
         <div className="login">
             <LoginHeader title={'Рады видеть!'} />
-            <form className="login__form" method="post" name="loginUserForm"
-                noValidate onSubmit={handleSubmit(onSubmit)}>
+            <form className="login__form"
+                method="post"
+                name="loginUserForm"
+                noValidate
+                onSubmit={handleSubmit(onSubmit)}>
                 <div className="register_form-filed">
                     <label className="register_form-filed-input-title">E-mail</label>
                     <input type="email"
@@ -47,7 +51,8 @@ export default function Login({ onLogin }) {
                         minLength="2" maxLength="30" id={`profile-email-input`}
                         required
                         {...register('email', {
-                            required: 'Поле обязательно к заполнению', pattern: {
+                            required: 'Поле обязательно к заполнению',
+                            pattern: {
                                 value: /[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+/,
                                 message: 'Неправильный формат email'
                             }
@@ -62,7 +67,8 @@ export default function Login({ onLogin }) {
                         minLength="2" maxLength="30" id={`profile-password-input`}
                         required
                         {...register('password', {
-                            required: 'Поле обязательно к заполнению', minLength: {
+                            required: 'Поле обязательно к заполнению',
+                            minLength: {
                                 value: 6,
                                 message: 'Минимум 6 символов'
                             }

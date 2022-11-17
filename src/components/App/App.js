@@ -8,7 +8,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import React from 'react';
 import Cookies from 'js-cookie';
 import Header from '../Header/Header';
-import Main from "../Main/Main";
+import Main from '../Main/Main';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import MoviesPage from '../Movies/MoviesPage/MoviesPage';
