@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { useHistory } from "react-router-dom";
+// import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+// import { useHistory } from "react-router-dom";
 import LoginHeader from '../Login/form/LoginHeader/LoginHeader';
 import LoginFooter from '../Login/form/LoginFooter/LoginFooter';
 import './Register.css';
@@ -13,11 +13,11 @@ import useFormWithValidation from '../../utils/validateAutch'
 
 export default function Register({ onRegister }) {
     // const [message, setMessage] = useState('');
-    const user = React.useContext(CurrentUserContext);
-    const history = useHistory();
+    // const user = React.useContext(CurrentUserContext);
+    // const history = useHistory();
 
 
-    const { values, handleChange, errors, isValid } = useFormWithValidation();
+    const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
     function handleSubmit(e) {
         e.preventDefault();
         onRegister(values);
@@ -35,10 +35,8 @@ export default function Register({ onRegister }) {
     // }
 
     useEffect(() => {
-        if (Object.keys(user).length !== 0) {
-            history.push('/');
-        }
-    }, [user]);
+        resetForm();
+    }, [resetForm]);
 
     return (
         <div className="register">

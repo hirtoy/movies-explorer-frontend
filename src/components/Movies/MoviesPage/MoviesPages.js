@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect} from 'react';
 import Header from '../../Header/Header';
 import Footer from '../../Footer/Footer';
@@ -11,7 +12,7 @@ export default function MoviesPages({loggedIn, movies, isMovies, onMenuClick, is
 
     useEffect(() => {
         resMoviesCard();
-    }, [location, resMoviesCard]);
+    }, [location]);
 
     return (
         <>

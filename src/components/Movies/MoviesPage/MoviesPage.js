@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect} from 'react';
 import Header from '../../Header/Header';
 import SearchForm from '../SearchForm/SearchForm';
@@ -25,7 +26,7 @@ export default function MoviesPage({
 
     useEffect(() => {
         resMoviesCard();
-    }, [location, resMoviesCard]);
+    }, [location]);
 
     return (
         <>

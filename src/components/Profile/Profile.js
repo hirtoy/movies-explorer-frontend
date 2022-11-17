@@ -5,13 +5,13 @@ import useFormWithValidation from '../../utils/validateAutch';
 import './Profile.css';
 
 // изменение профиля
-export default function Profile({ onSignOut, handleUpdateUser }) {
+export default function Profile({ onSignOut, onUpdateUser }) {
     const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
     const currentUser = useContext(CurrentUserContext);
 
     function handleSubmit(e) {
         e.preventDefault();
-        handleUpdateUser(values);
+        onUpdateUser(values);
     }
 
     useEffect(() => {
@@ -24,7 +24,7 @@ export default function Profile({ onSignOut, handleUpdateUser }) {
 
     return (
         <div className="profile">
-            <h1 className="profile__title">Привет, ${currentUser.name || ''}!`</h1>
+            <h1 className="profile__title">{`Привет, ${currentUser.name || ''}!`}</h1>
             <form className="profile__form"
                 method="post"
                 name="profileForm"
@@ -48,10 +48,10 @@ export default function Profile({ onSignOut, handleUpdateUser }) {
                         required />
                 </div>
 
-                <div className="profile__form-line">{errors.name || ''}</div>
+                <span className="profile__form-line">{errors.name || ''}</span>
 
                 <div className="profile__form-input-item">
-                    <label className="profile__form-input-title">E-mail</label>
+                    <span className="profile__form-input-title">E-mail</span>
                     <input onChange={handleChange}
                         value={values.email || ''}
                         name="email"
@@ -66,11 +66,15 @@ export default function Profile({ onSignOut, handleUpdateUser }) {
 
                 <span className="profile__form-input-error">{errors.email || ''}</span>
 
+                <div className="profile__form-submit-item">
+                    <span className="profile__form-input-message"></span>
                 <button type="submit"
                     className="profile__form-submit-btn"
                     disabled={reqValidate ? true : false}>
                     Редактировать
                 </button>
+                </div>
+
             </form>
             <Link to="/logout" className="profile__logout" onClick={onSignOut}>Выйти из аккаунта</Link>
         </div>

@@ -30,7 +30,7 @@ export default function App() {
     const [isRenderMovies, setIsRenderMoviesState] = useState([]);
     const [savedMovies, setSavedMoviesState] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [isOpenNavTab, setNavTabState] = useState(false);
+    const [isOpenMenuPopup, setMenuPopupState] = useState(false);
     const [isNotFound, setIsNotFoundState] = useState(false);
     const [isServerError, setIsServerError] = useState(false);
     const [isRenderCount, setIsRenderCount] = useState(0);
@@ -44,9 +44,9 @@ export default function App() {
 
     const history = useHistory();
 
-    const handleClick = () => setNavTabState(true);
-    const closeNavTab = () => setNavTabState(false);
-    const handleLinkClick = () => closeNavTab();
+    const handleClick = () => setMenuPopupState(true);
+    const closeMenuPopup = () => setMenuPopupState(false);
+    const handleLinkClick = () => closeMenuPopup();
 
 
     //проверка авторизации и данных пользователя
@@ -264,10 +264,12 @@ export default function App() {
         setIsServerError(false);
         mainApi.getUserMovies().then((moviesData) => {
             setSavedMoviesState(moviesData);
-        }).catch((err) => {
+        })
+        .catch((err) => {
             console.log(err);
             setIsServerError(true);
-        }).finally(() => {
+        })
+        .finally(() => {
             setIsLoading(false);
         });
     }
@@ -342,9 +344,9 @@ export default function App() {
 
                 </Switch>
 
-                <NavTab onClose={closeNavTab}
-                    isOpen={isOpenNavTab}
-                    onClick={handleLinkClick} />
+                <NavTab onClose={closeMenuPopup}
+                    isOpen={isOpenMenuPopup}
+                    onLickClick={handleLinkClick} />
             </div>
         </CurrentUserContext.Provider>
     );

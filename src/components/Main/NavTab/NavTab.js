@@ -3,7 +3,7 @@ import React from "react";
 import './NavTab.css';
 import '../../Header/Header.css';
 
-export default function NavTab({ isOpen, onClose, onMenuClick }) {
+export default function NavTab({ isOpen, onClose, onLickClick }) {
     return (
         <div className={`navtab ${isOpen ? 'navtab_opened' : ''}`}>
             <div className="navtab__container">
@@ -12,17 +12,17 @@ export default function NavTab({ isOpen, onClose, onMenuClick }) {
                 <nav>
                     <ul className="navtab__links">
                         <li className="navtab__link-item">
-                            <Link to="/" className="navtab__link" onClick={onMenuClick}>Главная</Link>
+                            <Link to="/" className="navtab__link" onClick={onLickClick}>Главная</Link>
                         </li>
                         <li className="navtab__link-item">
-                            <Link to="/movies" className="navtab__link navtab__link_underline" onClick={onMenuClick}>Фильмы</Link>
+                            <Link to="/movies" className="navtab__link navtab__link_underline" onClick={onLickClick}>Фильмы</Link>
                         </li>
                         <li className="navtab__link-item">
-                            <Link to="/saved-movies" className="navtab__link" onClick={onMenuClick}>Сохраненные фильмы</Link>
+                            <Link to="/saved-movies" className="navtab__link" onClick={onLickClick}>Сохраненные фильмы</Link>
                         </li>
                     </ul>
                 </nav>
-                <Link to="/profile" className="navtab__profile" onClick={onMenuClick}>
+                <Link to="/profile" className="navtab__profile" onClick={onLickClick}>
                     <span className="header__profile-name">Аккаунт</span>
                     <div className="header__profile-logo"></div>
                 </Link>
