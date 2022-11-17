@@ -10,11 +10,16 @@ class MainApi {
         return Promise.all([this.checkAuthorize(token), this.getUserMovies()]);
     }
 
-    register(name, password, email) {
+    register({ name, password, email }) {
         return fetch(`${this._baseUrl}/signup`, {
             method: 'POST',
             headers: this.headers,
-            body: JSON.stringify({ name, email, password })
+            credentials: 'include',
+            body: JSON.stringify({
+                name,
+                password,
+                email,
+            }),
         })
             .then(res => this._getResponseData(res));
     }
@@ -105,6 +110,6 @@ export const mainApi = new MainApi({
     baseUrl: 'https://api.hirtoy.nomoredomains.icu',
     headers: {
         'Content-Type': 'application/json',
-      },
-      credentials: 'include',
+    },
+    credentials: 'include',
 });

@@ -26,7 +26,6 @@ export default function Login({ onLogin }) {
                 setMessage('Неверная почта или пароль');
             }
         });
-        setTimeout(() => setMessage(''), 3000);
     }
 
     useEffect(() => {
@@ -40,7 +39,7 @@ export default function Login({ onLogin }) {
             <LoginHeader title={'Рады видеть!'} />
             <form className="login__form"
                 method="post"
-                name="loginUserForm"
+                name="loginForm"
                 noValidate
                 onSubmit={handleSubmit(onSubmit)}>
                 <div className="register_form-filed">
