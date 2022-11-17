@@ -2,7 +2,7 @@ import {Link, useHistory} from 'react-router-dom';
 import React from 'react';
 import '../Header/Header.css';
 
-export default function Auth({loggedIn, onClick}) {
+export default function Auth({loggedIn, onMenuClick}) {
     const history = useHistory();
 
     const handleLoginClick = () => {
@@ -11,7 +11,7 @@ export default function Auth({loggedIn, onClick}) {
 
     function handleClick(e) {
         e.preventDefault();
-        onClick();
+        onMenuClick();
     }
 
     return (
