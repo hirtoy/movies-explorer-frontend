@@ -1,32 +1,42 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import useFormWithValidation from '../../utils/validateAutch';
 import './Profile.css';
 
 // изменение профиля
-export default function Profile() {
-    const [name, setName] = React.useState('');
-    const [email, setEmail] = React.useState('');
+export default function Profile({ onSignOut, handleUpdateUser }) {
+    const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
+    const currentUser = useContext(CurrentUserContext);
 
-    function handleChangeName(e) {
-        setName(e.target.value);
+    function handleSubmit(e) {
+        e.preventDefault();
+        handleUpdateUser(values);
     }
 
-    function handleChangeEmail(e) {
-        setEmail(e.target.value);
-    }
+    useEffect(() => {
+        if (currentUser) {
+            resetForm(currentUser, {}, true);
+        }
+    }, [currentUser, resetForm]);
+
+    const reqValidate = (!isValid || (currentUser.name === values.name && currentUser.email === values.email));
 
     return (
         <div className="profile">
-            <h1 className="profile__title">Привет, Виталий!</h1>
-            <form className="profile__form" method="post" name="profileForm"
-                noValidate>
+            <h1 className="profile__title">Привет, ${currentUser.name || ''}!`</h1>
+            <form className="profile__form"
+                method="post"
+                name="profileForm"
+                noValidate
+                onSubmit={handleSubmit}>
 
                 <div className="profile__form-input-item">
 
                     <label className="profile__form-input-title">Имя</label>
 
-                    <input value={name || 'Виталий'}
-                        onChange={handleChangeName}
+                    <input value={values.name || ''}
+                        onChange={handleChange}
                         name="name"
                         type="text"
                         placeholder="Имя"
@@ -34,15 +44,16 @@ export default function Profile() {
                         minLength="2"
                         maxLength="30"
                         id="profile-name-input"
+                        pattern="^[A-Za-zА-Яа-яЁё /s -]+$"
                         required />
                 </div>
 
-                <div className="profile__form-line"></div>
+                <div className="profile__form-line">{errors.name || ''}</div>
 
                 <div className="profile__form-input-item">
                     <label className="profile__form-input-title">E-mail</label>
-                    <input value={email || 'pochta@yandex.ru'}
-                        onChange={handleChangeEmail}
+                    <input onChange={handleChange}
+                        value={values.email || ''}
                         name="email"
                         type="email"
                         placeholder="email"
@@ -53,13 +64,15 @@ export default function Profile() {
                         required />
                 </div>
 
-                <span className="profile__form-input-error"></span>
+                <span className="profile__form-input-error">{errors.email || ''}</span>
 
-                <button type="submit" className="profile__form-submit-btn">
+                <button type="submit"
+                    className="profile__form-submit-btn"
+                    disabled={reqValidate ? true : false}>
                     Редактировать
                 </button>
             </form>
-            <Link to="/logout" className="profile__logout">Выйти из аккаунта</Link>
+            <Link to="/logout" className="profile__logout" onClick={onSignOut}>Выйти из аккаунта</Link>
         </div>
     )
 }
