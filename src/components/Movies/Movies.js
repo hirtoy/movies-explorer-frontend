@@ -8,16 +8,20 @@ export default function Movies({ movies, isMovies, isLoading, isNotFound, isServ
         <section className="movies">
             {!isLoading && isNotFound ?
                 <p className="movies__items-none">{ERROR_NOT_FOUND}</p> : ''}
+
             {!isLoading && isServerError ?
                 <p className="movies__items-none">{ERROR_SERVER}</p> : ''}
+
             <div className="movies__item">
                 {movies.map(item => <MoviesCardList key={item.id} movie={item} isMovies={isMovies} like={like}
                     saved={savedMovies.some((m) => item.id === +m.movieId)} />)}
             </div>
+
             {!isLoading && movies.length < sortingMovies.length ?
                 <div className="movies__more-item">
                     <button type="button" className="movies__more" onClick={onMore}>Ещё</button>
                 </div> : ''}
+                
         </section>
     )
 }

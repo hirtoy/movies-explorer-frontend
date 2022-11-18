@@ -18,9 +18,9 @@ export default function useFormWithValidation() {
 
     if (name === 'email') {
       if (!isEmail(value)) {
-          input.setCustomValidity('Некорректый email');
+        input.setCustomValidity('Некорректый email');
       } else {
-          input.setCustomValidity('');
+        input.setCustomValidity('');
       }
     }
 
@@ -28,6 +28,7 @@ export default function useFormWithValidation() {
     setErrors({ ...errors, [name]: input.validationMessage });
     setIsValid(input.closest('form').checkValidity());
   };
+  
   const resetForm = useCallback(
     (newValues = {}, newErrors = {}, newIsValid = false) => {
       setValues(newValues);

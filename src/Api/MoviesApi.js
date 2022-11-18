@@ -10,7 +10,8 @@ class MoviesApi {
         this.url = this._baseUrl;
         return fetch(this.url, {
             headers: this.headers
-        }).then(res => this._getResponseData(res))
+        })
+        .then(res => this._getResponseData(res))
     }
 
     _getResponseData(res) {

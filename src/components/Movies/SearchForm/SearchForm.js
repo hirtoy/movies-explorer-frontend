@@ -41,15 +41,20 @@ export default function SearchForm({ searchMovies }) {
                     <button type="submit" className="searchform__input-submit" onClick={handleSearch}>Поиск</button>
 
                 </label>
+
                 <div className="searchform__checkbox-group">
+
                     <label className="searchform__checkbox-item">
                         <input type="checkbox" value={shortFilms || 0} onChange={handleChangeFilms} checked={Boolean(+shortFilms)} />
                         <span className="searchform__checkbox-slider"></span>
                     </label>
+                    
                     <p className="searchform__checkbox-title">Короткометражки</p>
                 </div>
             </form>
+
             <div className="searchform__line"></div>
+
         </section>
     )
 }

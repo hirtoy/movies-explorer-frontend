@@ -28,14 +28,17 @@ export default function SearchMoviesPage({ searchMovies }) {
     return (
         <section className="searchform">
             <form className="searchform__items" onSubmit={onSubmit}>
+
                 <label className="searchform__input-item">
                     <input value={searchRequest || ''} onChange={handleChangeRequest} type="text"
                         className="searchform__input"
                         placeholder="Фильм"
                         required>
                     </input>
+
                     <button onClick={handleSearch} type="button" className="searchform__input-submit">Найти</button>
                 </label>
+
                 <div className="searchform__checkbox-group">
                     <label className="searchform__checkbox-item">
                         <input value={shortFilms || 0} onChange={handleChangeFilms} type="checkbox"
@@ -43,9 +46,12 @@ export default function SearchMoviesPage({ searchMovies }) {
                         <span className="searchform__checkbox-slider"></span>
                     </label>
                     <p className="searchform__checkbox-title">Короткометражки</p>
+                    
                 </div>
             </form>
+
             <div className="searchform__line"></div>
+
         </section>
     )
 }

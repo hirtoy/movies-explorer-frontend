@@ -18,7 +18,8 @@ class MainApi {
             method: 'POST',
             headers: this.headers,
             body: JSON.stringify({name, email, password})
-        }).then(res => this._getResponseData(res));
+        })
+        .then(res => this._getResponseData(res));
     }
 
     authorize(email, password) {
@@ -28,7 +29,8 @@ class MainApi {
             headers: this.headers,
             credentials: 'include',
             body: JSON.stringify({email, password})
-        }).then(res => this._getResponseData(res));
+        })
+        .then(res => this._getResponseData(res));
     }
 
     getUserMovies() {
@@ -39,7 +41,8 @@ class MainApi {
                 'Authorization': `Bearer ${Cookies.get('jwt')}`,
             },
             credentials: 'include',
-        }).then(res => this._getResponseData(res))
+        })
+        .then(res => this._getResponseData(res))
     }
 
     checkAuthorize() {
@@ -51,7 +54,8 @@ class MainApi {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${Cookies.get('jwt')}`,
             },
-        }).then(res => this._getResponseData(res));
+        })
+        .then(res => this._getResponseData(res));
     }
 
     setUserData(data) {
@@ -67,7 +71,8 @@ class MainApi {
                 name: data.name,
                 email: data.email
             })
-        }).then(res => this._getResponseData(res));
+        })
+        .then(res => this._getResponseData(res));
     }
 
     addMovie(movie) {
@@ -80,7 +85,8 @@ class MainApi {
             },
             credentials: 'include',
             body: JSON.stringify(movie)
-        }).then(res => this._getResponseData(res));
+        })
+        .then(res => this._getResponseData(res));
     }
 
     deleteMovie(movieId) {
@@ -92,7 +98,8 @@ class MainApi {
                 'Authorization': `Bearer ${Cookies.get('jwt')}`,
             },
             credentials: 'include',
-        }).then(res => this._getResponseData(res));
+        })
+        .then(res => this._getResponseData(res));
     }
 
     _getResponseData(res) {

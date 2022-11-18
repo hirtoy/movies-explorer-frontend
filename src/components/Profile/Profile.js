@@ -75,14 +75,15 @@ export default function Profile({ loggedIn, onSignOut, onUpdateUser }) {
 
                 <div className="profile__form-submit-item">
                     <span className="profile__form-input-message"></span>
-                <button type="submit"
-                    className="profile__form-submit-btn"
-                    disabled={reqValidate ? true : false}>
-                    Редактировать
-                </button>
+                    <button type="submit"
+                        className="profile__form-submit-btn"
+                        disabled={reqValidate ? true : false}>
+                        Редактировать
+                    </button>
                 </div>
 
             </form>
+
             <Link to="/logout" className="profile__logout" onClick={handleClick}>Выйти из аккаунта</Link>
         </div>
     )
