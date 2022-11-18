@@ -1,7 +1,7 @@
 import React from 'react';
 import './MoviesCardList.css';
 import { IMAGE_URL } from '../../../utils/Constants';
-import { useLocation } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 import { getDuration } from '../../../utils/Utilite';
 
 export default function MoviesCardList({ movie, isMovies, like, saved }) {

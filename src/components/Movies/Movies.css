@@ -60,3 +60,12 @@
     display: flex;
     justify-content: center;
 }
+
+.movies__items-none {
+    margin: 0;
+    color: #fff;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.2;
+    text-align: center;
+}

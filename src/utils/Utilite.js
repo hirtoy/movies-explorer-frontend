@@ -1,7 +1,7 @@
 import {DESKTOP_WIDTH, MOVIES_CARD, SHORT_DURATION, MOBAL_WIDTH} from "./Constants";
 
 const isNameFound = (movie, name, formData) => {
-    return movie[name].includes(formData.searchQuery);
+    return movie[name].includes(formData.searchRequest);
 }
 
 const isFoundShortDuration = (movie, formData) => {

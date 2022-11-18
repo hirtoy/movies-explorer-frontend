@@ -5,9 +5,16 @@ import useFormWithValidation from '../../utils/validateAutch';
 import './Profile.css';
 
 // изменение профиля
-export default function Profile({ onSignOut, onUpdateUser }) {
+export default function Profile({ loggedIn, onSignOut, onUpdateUser }) {
     const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
     const currentUser = useContext(CurrentUserContext);
+
+    const handleClick = (e) => {
+        if (loggedIn) {
+            e.preventDefault();
+            onSignOut()
+        }
+    }
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -76,7 +83,7 @@ export default function Profile({ onSignOut, onUpdateUser }) {
                 </div>
 
             </form>
-            <Link to="/logout" className="profile__logout" onClick={onSignOut}>Выйти из аккаунта</Link>
+            <Link to="/logout" className="profile__logout" onClick={handleClick}>Выйти из аккаунта</Link>
         </div>
     )
 }
