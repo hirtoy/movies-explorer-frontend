@@ -24,17 +24,24 @@ export default function MoviesCardList({ movie, isMovies, like, saved }) {
     return (
         <article className="movie-list" id={movie.id}>
             <div className="movie-list__title">
+                
                 <a target="_blank" rel="noreferrer" href={`${movie.trailerLink}`}
-                   className="movie-list__title-text">{movie.nameRU}</a>
+                    className="movie-list__title-text">{movie.nameRU}</a>
                 <p className="movie-list__title-duration">{getDuration(movie.duration)}</p>
             </div>
             <a target="_blank" rel="noreferrer" href={`${movie.trailerLink}`}>
+
                 <img className="movie-list__image"
                     alt={movie.nameRU}
                     src={movie.image.url ? `${IMAGE_URL}${movie.image.url}` : movie.image} />
             </a>
+
             <div className="movie-list__like-button-item">
-                <button type="button" onClick={handleLikeClick} className={`movie-list__like-button ${buttonClass}`}>
+
+                <button
+                    type="button"
+                    onClick={handleLikeClick}
+                    className={`movie-list__like-button ${buttonClass}`}>
                     {buttonName}
                 </button>
             </div>

@@ -19,9 +19,17 @@ export default function MoviesPage({ loggedIn, movies, sortingMovies, savedMovie
             <Header loggedIn={loggedIn} onMenuClick={onMenuClick} />
             <main>
                 <SearchForm searchMovies={searchMovies} />
-                <Movies movies={movies} sortingMovies={sortingMovies} isMovies={isMovies}
-                    isLoading={isLoading} isNotFound={isNotFound} savedMovies={savedMovies}
-                    isServerError={isServerError} onMore={onMore} like={like} />
+                
+                <Movies
+                    movies={movies}
+                    sortingMovies={sortingMovies}
+                    isMovies={isMovies}
+                    isLoading={isLoading}
+                    isNotFound={isNotFound}
+                    savedMovies={savedMovies}
+                    isServerError={isServerError}
+                    onMore={onMore}
+                    like={like} />
             </main>
             <Footer />
         </>

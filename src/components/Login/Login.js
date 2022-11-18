@@ -26,13 +26,16 @@ export default function Login({ onLogin }) {
     return (
         <div className="login">
             <LoginHeader title={'Рады видеть!'} />
+
             <form className="login__form"
                 method="post"
                 name="loginForm"
                 noValidate
                 onSubmit={handleSubmit}>
                 <div className="register_form-filed">
+
                     <label className="register_form-filed-input-title">E-mail</label>
+
                     <input type="email"
                         placeholder="pochta@yandex.ru"
                         className={`register_form-filed-input ${errors.email && 'register_form-filed-input_failed-validation'}`}
@@ -42,6 +45,7 @@ export default function Login({ onLogin }) {
                         value={values.email || ''} />
                     {errors?.email && <span className="register_form-filed-input-error">{errors.email || ''}</span>}
                 </div>
+
                 <div className="register_form-filed">
                     <label className="register_form-filed-input-title">Пароль</label>
                     <input type="password"
@@ -54,13 +58,16 @@ export default function Login({ onLogin }) {
                     {errors.password &&
                         <span className="register_form-filed-input-error">{errors.password || ''}</span>}
                 </div>
+
                 <div className="register_form-submit__item">
                     <span className="register_form-filed-input-error"></span>
                     <button type="submit" className={`register_form-submit ${!isValid && 'register_form-submit_login'}`} disabled={!isValid}>
                         Войти
                     </button>
                 </div>
+
             </form>
+
             <LoginFooter title={'Ещё не зарегистрированы?'} linkText={'Регистрация'} link={'/signup'} />
         </div>
     )

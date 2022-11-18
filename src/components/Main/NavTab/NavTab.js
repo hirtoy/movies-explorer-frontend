@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import React from "react";
 import './NavTab.css';
 import '../../Header/Header.css';
-import {CurrentUserContext} from '../../../contexts/CurrentUserContext';
+import { CurrentUserContext } from '../../../contexts/CurrentUserContext';
 
 export default function NavTab({ isOpen, onClose, onLickClick }) {
 
@@ -16,13 +16,21 @@ export default function NavTab({ isOpen, onClose, onLickClick }) {
                 <nav>
                     <ul className="navtab__links">
                         <li className="navtab__link-item">
-                            <Link to="/" className="navtab__link" onClick={onLickClick}>Главная</Link>
+                            <Link to="/"
+                                className="navtab__link"
+                                onClick={onLickClick}>Главная</Link>
                         </li>
+
                         <li className="navtab__link-item">
-                            <Link to="/movies" className="navtab__link navtab__link_underline" onClick={onLickClick}>Фильмы</Link>
+                            <Link to="/movies"
+                                className="navtab__link navtab__link_underline"
+                                onClick={onLickClick}>Фильмы</Link>
                         </li>
+
                         <li className="navtab__link-item">
-                            <Link to="/saved-movies" className="navtab__link" onClick={onLickClick}>Сохраненные фильмы</Link>
+                            <Link to="/saved-movies"
+                                className="navtab__link"
+                                onClick={onLickClick}>Сохраненные фильмы</Link>
                         </li>
                     </ul>
                 </nav>

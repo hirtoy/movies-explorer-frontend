@@ -43,9 +43,9 @@
 }
 
 .header__logo {
-  background-image: url(../../images/logo_main.png);
   width: 38px;
   height: 38px;
+  background-image: url(../../images/logo_main.png);
   background-repeat: no-repeat;
   background-size: contain;
   margin: 18px 44px 18px 0;
@@ -57,10 +57,10 @@
 
 @media screen and (max-width: 768px) {
   .header__menu {
-    background-image: url(../../images/menu.svg);
-    color: #fff;
     width: 38px;
     height: 38px;
+    background-image: url(../../images/menu.svg);
+    color: #fff;
     background-repeat: no-repeat;
     background-size: contain;
     cursor: pointer;
@@ -72,11 +72,11 @@
 }
 
 .header__signin {
+  width: 76px;
+  height: 32px;
   margin-left: 30px;
   background: #3ddc84;
   border-radius: 3px;
-  width: 76px;
-  height: 32px;
   border: none;
   font-weight: 500;
   font-size: 12px;
@@ -90,11 +90,11 @@
 
 @media screen and (max-width: 768px) {
   .header__signin {
+    width: 54px;
+    height: 26px;
     margin-left: 14px;
     font-size: 10px;
     line-height: 1.6;
-    width: 54px;
-    height: 26px;
   }
 }
 
@@ -158,13 +158,13 @@
 }
 
 .header__profile-logo {
-  background-image: url(../../images/account.svg);
   width: 26px;
   height: 26px;
+  margin: 3px 3px 3px 7px;
+  background-image: url(../../images/account.svg);
   background-repeat: no-repeat;
   background-size: contain;
   color: #fff;
-  margin: 3px 3px 3px 7px;
 }
 
 .header__profile-name {

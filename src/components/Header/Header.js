@@ -8,7 +8,9 @@ export default function Header({loggedIn, aboutPage, onMenuClick}) {
     return (
         <header className={`header ${aboutPage && 'header__backraund'}`}>
             <Link to="/" className="header__logo"></Link>
+
             {loggedIn && <HeaderNavigation />}
+            
             <Auth loggedIn={loggedIn} onMenuClick={onMenuClick}/>
         </header>
     )

@@ -9,16 +9,23 @@ export default function Footer() {
             <div className="footer__text">
                 <p className="footer__copyright">&copy; 2022</p>
                 <nav>
+
                     <ul className="footer__links">
                         <li className="footer__link-item">
-                            <a target="_blank" href="https://practicum.yandex.ru/"
-                                className="footer__link" rel="noreferrer">Яндекс.Практикум</a>
+                            <a target="_blank"
+                                href="https://practicum.yandex.ru/"
+                                className="footer__link"
+                                rel="noreferrer">Яндекс.Практикум</a>
                         </li>
+
                         <li className="footer__link-item">
-                            <a target="_blank" href="https://github.com/hirtoy"
-                                className="footer__link" rel="noreferrer">Github</a>
+                            <a target="_blank"
+                                href="https://github.com/hirtoy"
+                                className="footer__link"
+                                rel="noreferrer">Github</a>
                         </li>
                     </ul>
+
                 </nav>
             </div>
         </footer>
