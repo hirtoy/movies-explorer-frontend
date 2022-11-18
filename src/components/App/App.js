@@ -48,7 +48,6 @@ export default function App() {
     const closeMenuPopup = () => setMenuPopupState(false);
     const handleLinkClick = () => closeMenuPopup();
 
-
     //проверка авторизации и данных пользователя
     React.useEffect(() => {
         if (Cookies.get('jwt') && Cookies.get('jwt').length === 172) {
@@ -165,8 +164,8 @@ export default function App() {
         setSortingMovieState([]);
         setIsServerError(false);
         if (localStorage.getItem('allMovies')) {
-            const allMoviesStorage = JSON.parse(localStorage.getItem('allMovies'));
-            const sortingMovies = allMoviesStorage.filter(function (movie) {
+            const allMoviesLocal = JSON.parse(localStorage.getItem('allMovies'));
+            const sortingMovies = allMoviesLocal.filter(function (movie) {
                 return isFound(movie, formData);
             });
             setIsRenderMovies(sortingMovies);
@@ -179,12 +178,14 @@ export default function App() {
                         return isFound(movie, formData);
                     });
                     setIsRenderMovies(sortingMovies);
-                }).catch((err) => {
-                    console.log(err);
-                    setIsServerError(true);
-                }).finally(() => {
-                    setIsLoading(false);
-                });
+                })
+                    .catch((err) => {
+                        console.log(err);
+                        setIsServerError(true);
+                    })
+                    .finally(() => {
+                        setIsLoading(false);
+                    });
             }
         }
     }
@@ -197,12 +198,14 @@ export default function App() {
                 return isFound(movie, formData);
             });
             setSavedMoviesState(sortingMovies);
-        }).catch((err) => {
-            console.log(err);
-            setIsServerError(true);
-        }).finally(() => {
-            setIsLoading(false);
-        });
+        })
+            .catch((err) => {
+                console.log(err);
+                setIsServerError(true);
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
     }
 
     const handleLoadMore = () => {
@@ -265,13 +268,13 @@ export default function App() {
         mainApi.getUserMovies().then((moviesData) => {
             setSavedMoviesState(moviesData);
         })
-        .catch((err) => {
-            console.log(err);
-            setIsServerError(true);
-        })
-        .finally(() => {
-            setIsLoading(false);
-        });
+            .catch((err) => {
+                console.log(err);
+                setIsServerError(true);
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
     }
 
     const clearStorage = () => {
@@ -287,7 +290,7 @@ export default function App() {
             <div className="app">
                 <Switch>
                     <Route exact path="/">
-                        <Header loggedIn={false} aboutPage={true} onMenuClick={handleClick} />
+                        <Header loggedIn={loggedIn} aboutPage={true} onMenuClick={handleClick} />
                         <Main />
                     </Route>
 
