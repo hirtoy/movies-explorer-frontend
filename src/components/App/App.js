@@ -288,6 +288,7 @@ export default function App() {
     return (
         <CurrentUserContext.Provider value={currentUser}>
             <div className="app">
+                
                 <Switch>
                     <Route exact path="/">
                         <Header loggedIn={loggedIn} aboutPage={true} onMenuClick={handleClick} />
