@@ -1,4 +1,4 @@
-import {DESKTOP_WIDTH, MOVIES_CARD, SHORT_DURATION, MOBAL_WIDTH} from "./Constants";
+import {DESKTOP_WIDTH, MOVIES_CARD, SHORT_DURATION, MOBAL_WIDTH} from './Constants';
 
 const isNameFound = (movie, name, formData) => {
     return movie[name].includes(formData.searchRequest);
