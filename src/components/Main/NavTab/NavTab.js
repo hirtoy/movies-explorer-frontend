@@ -2,8 +2,12 @@ import { Link } from "react-router-dom";
 import React from "react";
 import './NavTab.css';
 import '../../Header/Header.css';
+import {CurrentUserContext} from '../../../contexts/CurrentUserContext';
 
 export default function NavTab({ isOpen, onClose, onLickClick }) {
+
+    const user = React.useContext(CurrentUserContext);
+
     return (
         <div className={`navtab ${isOpen ? 'navtab_opened' : ''}`}>
             <div className="navtab__container">
@@ -23,7 +27,7 @@ export default function NavTab({ isOpen, onClose, onLickClick }) {
                     </ul>
                 </nav>
                 <Link to="/profile" className="navtab__profile" onClick={onLickClick}>
-                    <span className="header__profile-name">Аккаунт</span>
+                    <span className="header__profile-name">{user ? user.email : 'Аккаунт'}</span>
                     <div className="header__profile-logo"></div>
                 </Link>
             </div>
