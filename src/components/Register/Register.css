@@ -58,25 +58,28 @@
 }
 
 .register_form-filed-input-title {
+    margin-bottom: 10px;
     font-weight: 400;
     font-size: 10px;
     line-height: 1.2;
     color: #8B8B8B;
-    margin-bottom: 10px;
 }
 
 .register_form-filed-input-error {
+    min-height: 12px;
+    margin-top: 10px;
     font-weight: 400;
     font-size: 10px;
     line-height: 1.2;
     color: #EE3465;
-    margin-top: 10px;
     display: block;
-    min-height: 12px;
 }
 
 
 .register_form-submit {
+    width: 100%;
+    height: 45px;
+    margin-top: 10px;
     background: #4285F4;
     border-radius: 3px;
     border: unset;
@@ -85,9 +88,6 @@
     font-size: 14px;
     line-height: 1.21;
     color: #FFFFFF;
-    height: 45px;
-    margin-top: 10px;
-    width: 100%;
     cursor: pointer;
 }
 

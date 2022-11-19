@@ -48,6 +48,14 @@ export default function App() {
     const closeMenuPopup = () => setMenuPopupState(false);
     const handleLinkClick = () => closeMenuPopup();
 
+    const clearStorage = () => {
+        localStorage.removeItem('allMovies');
+        localStorage.removeItem('sortingMovies');
+        localStorage.removeItem('isRenderedMovies');
+        localStorage.removeItem('searchRequest');
+        localStorage.removeItem('shortFilms');
+    }
+
     //проверка авторизации и данных пользователя
     React.useEffect(() => {
         if (Cookies.get('jwt') && Cookies.get('jwt').length === 172) {
@@ -81,14 +89,6 @@ export default function App() {
     //         });
     // }, []);
 
-    //редактор пользователя
-    const handleUpdateUser = (formData) => {
-        return mainApi.setUserData(formData)
-            .then((userData) => {
-                setCurrentUser(userData);
-            });
-    };
-
     //кол-во фильмов в зависимости от экрана
     React.useEffect(() => {
         setWindows(getWindow(window.innerWidth));
@@ -111,53 +111,6 @@ export default function App() {
         localStorage.setItem('isRenderedMovies', JSON.stringify(sortingMovies.slice(0, isRenderCount)));
         setIsRenderMoviesState(sortingMovies.slice(0, isRenderCount));
         sortingMovies.length === 0 ? setIsNotFoundState(true) : setIsNotFoundState(false);
-    }
-
-
-    //регистрация
-    const onRegister = ({ name, email, password }) => {
-        return mainApi.register(name, email, password)
-            .then((res) => {
-                if (res) {
-                    onLogin({ email, password });
-                    setErrorMessage('');
-                    history.push('/movies');
-                }
-            });
-    }
-
-    //авторизация
-    const onLogin = ({ email, password }) => {
-        return mainApi.authorize(email, password)
-            .then((res) => {
-                if (res.token) {
-                    Cookies.set('jwt', res.token)
-                    setLoggedIn(true);
-                    localStorage.setItem('loggedIn', true);
-                    setCurrentUser(res.user);
-                    setErrorMessage('');
-                    mainApi.getUserMovies().then((moviesData) => {
-                        setSavedMoviesState(moviesData)
-                    });
-                    history.push('/movies');
-                }
-            });
-    };
-
-    //выход
-    const onSignOut = () => {
-        const jwt = Cookies.get('jwt');
-        if (jwt) {
-            Cookies.remove('jwt');
-            setLoggedIn(false);
-            localStorage.setItem('loggedIn', false);
-            setCurrentUser({});
-            setSortingMovieState([]);
-            setIsRenderMoviesState([]);
-            setSavedMoviesState([]);
-            clearStorage();
-            history.push('/');
-        }
     }
 
     const handleSearchMovies = (formData) => {
@@ -277,18 +230,64 @@ export default function App() {
             });
     }
 
-    const clearStorage = () => {
-        localStorage.removeItem('allMovies');
-        localStorage.removeItem('sortingMovies');
-        localStorage.removeItem('isRenderedMovies');
-        localStorage.removeItem('searchRequest');
-        localStorage.removeItem('shortFilms');
+    //редактор пользователя
+    const handleUpdateUser = (formData) => {
+        return mainApi.setUserData(formData)
+            .then((userData) => {
+                setCurrentUser(userData);
+            });
+    };
+
+    //регистрация
+    const onRegister = ({ name, email, password }) => {
+        return mainApi.register(name, email, password)
+            .then((res) => {
+                if (res) {
+                    onLogin({ email, password });
+                    setErrorMessage('');
+                    history.push('/movies');
+                }
+            });
+    }
+
+    //авторизация
+    const onLogin = ({ email, password }) => {
+        return mainApi.authorize(email, password)
+            .then((res) => {
+                if (res.token) {
+                    Cookies.set('jwt', res.token)
+                    setLoggedIn(true);
+                    localStorage.setItem('loggedIn', true);
+                    setCurrentUser(res.user);
+                    setErrorMessage('');
+                    mainApi.getUserMovies().then((moviesData) => {
+                        setSavedMoviesState(moviesData)
+                    });
+                    history.push('/movies');
+                }
+            });
+    };
+
+    //выход
+    const onSignOut = () => {
+        const jwt = Cookies.get('jwt');
+        if (jwt) {
+            Cookies.remove('jwt');
+            setLoggedIn(false);
+            localStorage.setItem('loggedIn', false);
+            setCurrentUser({});
+            setSortingMovieState([]);
+            setIsRenderMoviesState([]);
+            setSavedMoviesState([]);
+            clearStorage();
+            history.push('/');
+        }
     }
 
     return (
         <CurrentUserContext.Provider value={currentUser}>
             <div className="app">
-                
+
                 <Switch>
                     <Route exact path="/">
                         <Header loggedIn={loggedIn} aboutPage={true} onMenuClick={handleClick} />

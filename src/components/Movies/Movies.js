@@ -1,11 +1,15 @@
 import React from 'react';
 import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList';
+import '../Spinner/Spinner.css'
 import './Movies.css';
 import { ERROR_NOT_FOUND, ERROR_SERVER } from '../../utils/Constants';
+import Spinner from '../Spinner/Spinner';
 
 export default function Movies({ movies, isMovies, isLoading, isNotFound, isServerError, onMore, sortingMovies, like, savedMovies }) {
     return (
         <section className="movies">
+            {isLoading && <Spinner/>}
+
             {!isLoading && isNotFound ?
                 <p className="movies__items-none">{ERROR_NOT_FOUND}</p> : ''}
 
