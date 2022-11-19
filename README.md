@@ -8,4 +8,7 @@ https://api.hirtoy.nomoredomains.icu
 # Ссылка на фронтенд 
 https://hirtoy.nomoredomains.icu
 
+# Ссылка на Pull-реквест
+https://github.com/hirtoy/movies-explorer-frontend/pull/3
+
 публичный IP сервера 158.160.42.17
