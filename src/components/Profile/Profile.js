@@ -54,8 +54,9 @@ export default function Profile({ loggedIn, onSignOut, onUpdateUser }) {
                         pattern="^[A-Za-zА-Яа-яЁё /s -]+$"
                         required />
                 </div>
+                <span className="profile__form-input-error">{errors.name || ''}</span>
 
-                <span className="profile__form-line">{errors.name || ''}</span>
+                <span className="profile__form-line" />
 
                 <div className="profile__form-input-item">
                     <span className="profile__form-input-title">E-mail</span>
@@ -74,7 +75,6 @@ export default function Profile({ loggedIn, onSignOut, onUpdateUser }) {
                 <span className="profile__form-input-error">{errors.email || ''}</span>
 
                 <div className="profile__form-submit-item">
-                    <span className="profile__form-input-message"></span>
                     <button type="submit"
                         className="profile__form-submit-btn"
                         disabled={reqValidate ? true : false}>

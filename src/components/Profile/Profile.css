@@ -127,3 +127,7 @@
     display: flex;
     justify-content: space-between;
 }
+
+.profile__form-input-error {
+    color: #EE3465;
+}
