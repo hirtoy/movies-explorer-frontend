@@ -6,7 +6,20 @@ import Movies from '../Movies';
 import Footer from '../../Footer/Footer';
 import { useLocation } from 'react-router-dom';
 
-export default function MoviesPage({ loggedIn, movies, sortingMovies, savedMovies, isMovies, onMenuClick, isLoading, searchMovies, isNotFound, isServerError, onMore, like, resMoviesCard }) {
+export default function MoviesPage({
+    loggedIn,
+    movies,
+    sortingMovies,
+    savedMovies,
+    isMovies,
+    onMenuClick,
+    isLoading,
+    searchMovies,
+    isNotFound,
+    isServerError,
+    onMore,
+    like,
+    resMoviesCard }) {
 
     const location = useLocation();
 
@@ -19,7 +32,6 @@ export default function MoviesPage({ loggedIn, movies, sortingMovies, savedMovie
             <Header loggedIn={loggedIn} onMenuClick={onMenuClick} />
             <main>
                 <SearchForm searchMovies={searchMovies} />
-                
                 <Movies
                     movies={movies}
                     sortingMovies={sortingMovies}
