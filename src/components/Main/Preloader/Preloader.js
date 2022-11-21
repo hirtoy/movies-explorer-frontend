@@ -1,4 +1,5 @@
 import './Preloader';
+import React from 'react'
 
 export default function Preloader() {
   return (

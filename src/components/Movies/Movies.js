@@ -7,7 +7,7 @@ import Preloader from '../Main/Preloader/Preloader';
 export default function Movies({ movies, isMovies, isLoading, isNotFound, isServerError, onMore, sortingMovies, like, savedMovies }) {
     return (
         <section className="movies">
-            {isLoading && <Preloader />}
+            {isLoading && <Preloader/>}
             {!isLoading && isNotFound ?
                 <p className="movies__items-none">{ERROR_NOT_FOUND}</p> : ''}
 
