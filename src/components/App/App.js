@@ -101,24 +101,23 @@ export default function App() {
     const handleSearchMovies = (formData) => {
         setSortingMovieState([]);
         setIsServerError(false);
-        if (loggedIn) {
-            setIsLoading(true);
-            moviesApi.getAll()
-                .then((moviesData) => {
-                    localStorage.setItem('allMovies', JSON.stringify(moviesData));
-                    const sortingMovies = moviesData.filter(function (movie) {
-                        return isFound(movie, formData);
-                    });
-                    setIsRenderMovies(sortingMovies);
-
-                });
+        if (localStorage.getItem('allMovies')) {
+            const allMoviesLocal = JSON.parse(localStorage.getItem('allMovies'));
+            const sortingMovies = allMoviesLocal.filter(function (movie) {
+                return isFound(movie, formData);
+            });
+            setIsRenderMovies(sortingMovies);
         } else {
-            if (localStorage.getItem('allMovies')) {
-                const allMoviesLocal = JSON.parse(localStorage.getItem('allMovies'));
-                const sortingMovies = allMoviesLocal.filter(function (movie) {
-                    return isFound(movie, formData);
-                });
-                setIsRenderMovies(sortingMovies)
+            if (loggedIn) {
+                setIsLoading(true);
+                moviesApi.getAll()
+                    .then((moviesData) => {
+                        localStorage.setItem('allMovies', JSON.stringify(moviesData));
+                        const sortingMovies = moviesData.filter(function (movie) {
+                            return isFound(movie, formData);
+                        });
+                        setIsRenderMovies(sortingMovies);
+                    })
                     .catch((err) => {
                         console.log(err);
                         setIsServerError(true);
