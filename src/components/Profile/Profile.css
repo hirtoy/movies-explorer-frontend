@@ -52,6 +52,12 @@
   align-items: center;
 }
 
+.profile__form-input-message {
+    font-size: 13px;
+    line-height: 1.23;
+    color: #EE3465;
+}
+
 /* @media screen and (max-width: 1280px) {
     .profile__form {
         margin: 96px auto 0 auto;

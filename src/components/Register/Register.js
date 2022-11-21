@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import LoginHeader from '../Login/form/LoginHeader/LoginHeader';
 import LoginFooter from '../Login/form/LoginFooter/LoginFooter';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
@@ -8,10 +8,18 @@ import './Register.css';
 
 export default function Register({ onRegister }) {
     const currentUser = useContext(CurrentUserContext);
+    const [message, setMessage] = useState('');
     const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
     function handleSubmit(e) {
         e.preventDefault();
-        onRegister(values);
+        onRegister(values).catch((err) => {
+            console.log(err);
+            if (err === 'Ошибка: 409') {
+                setMessage('Пользователь с таким email уже существует');
+            }
+        })
+
+        setTimeout(() => setMessage(''), 3000);
     }
 
     useEffect(() => {
@@ -74,7 +82,7 @@ export default function Register({ onRegister }) {
                 </div>
 
                 <div className="register_form-submit__item">
-                    <span className="register_form-filed-input-error"></span>
+                    <span className="register_form-filed-input-error">{message}</span>
                     <button type="submit" className={`register_form-submit ${reqValidate && 'register_form-submit_disabled'}`} disabled={!isValid}>
                         Зарегистрироваться
                     </button>

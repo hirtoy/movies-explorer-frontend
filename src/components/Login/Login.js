@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import LoginHeader from './form/LoginHeader/LoginHeader';
 import useFormWithValidation from '../../utils/validateAutch';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
@@ -10,10 +10,21 @@ import '../Register/Register.css';
 export default function Login({ onLogin }) {
     const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
     const currentUser = useContext(CurrentUserContext);
+    const [message, setMessage] = useState('');
 
     function handleSubmit(e) {
         e.preventDefault();
-        onLogin(values);
+        onLogin(values).catch((err) => {
+            console.log(err);
+            if (err === 'Ошибка: 400') {
+                setMessage('Почта или пароль введен неверно');
+            }
+            if (err === 'Ошибка: 401') {
+                setMessage('Неверная почта или пароль');
+            }
+        });
+
+        setTimeout(() => setMessage(''), 3000);
     }
 
     useEffect(() => {
@@ -69,7 +80,7 @@ export default function Login({ onLogin }) {
                 </div>
 
                 <div className="register_form-submit__item">
-                    <span className="register_form-filed-input-error"></span>
+                    <span className="register_form-filed-input-error">{message}</span>
                     <button type="submit" className={`register_form-submit ${reqValidate && 'register_form-submit_disabled'}`} disabled={!isValid}>
                         Войти
                     </button>

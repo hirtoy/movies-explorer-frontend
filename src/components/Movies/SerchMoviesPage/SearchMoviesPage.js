@@ -46,7 +46,7 @@ export default function SearchMoviesPage({ searchMovies }) {
                     <label className="searchform__checkbox-item">
                         <input
                             value={shortFilms || 0}
-                            onClick={handleSearch}
+                  
                             onChange={handleChangeFilms}
                             type="checkbox"
                             className="searchform__checkbox"

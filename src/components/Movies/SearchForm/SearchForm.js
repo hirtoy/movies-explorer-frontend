@@ -45,7 +45,7 @@ export default function SearchForm({ searchMovies }) {
                 <div className="searchform__checkbox-group">
 
                     <label className="searchform__checkbox-item">
-                        <input type="checkbox" value={shortFilms || 0} onClick={handleSearch} onChange={handleChangeFilms} checked={Boolean(+shortFilms)} />
+                        <input type="checkbox" value={shortFilms || 0} onChange={handleChangeFilms} checked={Boolean(+shortFilms)} />
                         <span className="searchform__checkbox-slider"></span>
                     </label>
                     

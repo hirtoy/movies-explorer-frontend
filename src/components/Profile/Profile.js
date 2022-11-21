@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import useFormWithValidation from '../../utils/validateAutch';
@@ -8,6 +8,7 @@ import './Profile.css';
 export default function Profile({ loggedIn, onSignOut, onUpdateUser }) {
     const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
     const currentUser = useContext(CurrentUserContext);
+    const [message, setMessage] = useState('');
 
     const handleClick = (e) => {
         if (loggedIn) {
@@ -18,7 +19,15 @@ export default function Profile({ loggedIn, onSignOut, onUpdateUser }) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        onUpdateUser(values);
+        onUpdateUser(values)
+        .then(() => {
+            setMessage('Данные сохранены');
+        })
+        .catch((err) => {
+            console.log(err);
+            setMessage('Ошибка сохранения данных');
+        });
+        setTimeout(() => setMessage(''), 3000);
     }
 
     useEffect(() => {
@@ -78,6 +87,7 @@ export default function Profile({ loggedIn, onSignOut, onUpdateUser }) {
                 </div>
 
                 <div className="profile__form-submit-item">
+                <span className="profile__form-input-message">{message}</span>
                     <button type="submit"
                         className= {`profile__form-submit-btn ${reqValidate ? 'profile__form-submit-btn_disabled' : ''}`}
                         disabled={reqValidate ? true : false}>
