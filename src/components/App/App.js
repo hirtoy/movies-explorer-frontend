@@ -156,8 +156,10 @@ export default function App() {
     };
 
     const handleLike = (movie, isSavedMoviesPage) => {
-        if (isSavedMoviesPage) {
-            mainApi.deleteMovie(movie._id)
+        const isLiked = savedMovies.some(m => +m.movieId === movie.id);
+        if (isLiked) {
+            const movieDB = savedMovies.filter(m => +m.movieId === movie.id);
+            mainApi.deleteMovie(movieDB[0]._id)
                 .then((movie) => {
                     setSavedMoviesState(savedMovies => savedMovies.filter((m) => m._id !== movie._id));
                     setIsRenderMoviesState(JSON.parse(localStorage.getItem('isRenderMovies')));
@@ -166,10 +168,8 @@ export default function App() {
                     console.log(err);
                 });
         } else {
-            const isLiked = savedMovies.some(m => +m.movieId === movie.id);
-            if (isLiked) {
-                const movieDB = savedMovies.filter(m => +m.movieId === movie.id);
-                mainApi.deleteMovie(movieDB[0]._id)
+            if (isSavedMoviesPage) {
+                mainApi.deleteMovie(movie._id)
                     .then((movie) => {
                         setSavedMoviesState(savedMovies => savedMovies.filter((m) => m._id !== movie._id));
                         setIsRenderMoviesState(JSON.parse(localStorage.getItem('isRenderMovies')));
@@ -201,28 +201,6 @@ export default function App() {
             }
         }
     };
-
-    const debounce = (fn, ms) => {
-        let timer;
-        return () => {
-            clearTimeout(timer);
-            timer = setTimeout(() => {
-                timer = null;
-                fn.apply(this, arguments);
-            }, ms)
-        };
-    }
-
-    React.useEffect(() => {
-        const debouncedHandleResize = debounce(function handleResize() {
-            setWindows(getWindow(window.innerWidth));
-        }, 1000)
-        window.addEventListener('resize', debouncedHandleResize);
-
-        return () => {
-            window.removeEventListener('resize', debouncedHandleResize)
-        }
-    });
 
     const resMoviesCard = () => {
         setIsLoading(true);
