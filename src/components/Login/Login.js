@@ -1,18 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react';
-// import { useHistory } from "react-router-dom";
-// import { useForm } from "react-hook-form";
-// import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import React, { useEffect, useContext } from 'react';
 import LoginHeader from './form/LoginHeader/LoginHeader';
 import useFormWithValidation from '../../utils/validateAutch';
-// import LoginForm from './form/LoginForm/LoginForm';
-// import LoginSubmit from './form/LoginSubmit/LoginSubmit';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import LoginFooter from './form/LoginFooter/LoginFooter';
 import './Login.css';
 import '../Register/Register.css';
 
 export default function Login({ onLogin }) {
     const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
+    const currentUser = useContext(CurrentUserContext);
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -20,8 +17,12 @@ export default function Login({ onLogin }) {
     }
 
     useEffect(() => {
-        resetForm();
-    }, [resetForm]);
+        if (currentUser) {
+            resetForm(currentUser, {}, true);
+        }
+    }, [currentUser, resetForm]);
+
+    const reqValidate = (!isValid || (currentUser.name === values.name && currentUser.email === values.email));
 
     return (
         <div className="login">
@@ -32,36 +33,44 @@ export default function Login({ onLogin }) {
                 name="loginForm"
                 noValidate
                 onSubmit={handleSubmit}>
+
                 <div className="register_form-filed">
 
                     <label className="register_form-filed-input-title">E-mail</label>
 
-                    <input type="email"
+                    <input
+                        type="email"
+                        name="email"
                         placeholder="pochta@yandex.ru"
                         className={`register_form-filed-input ${errors.email && 'register_form-filed-input_failed-validation'}`}
                         minLength="2" maxLength="30" id={`profile-email-input`}
                         required
                         onChange={handleChange}
                         value={values.email || ''} />
-                    {errors?.email && <span className="register_form-filed-input-error">{errors.email || ''}</span>}
+                    {errors.email &&
+                        <span className="register_form-filed-input-error">{errors.email || ''}</span>}
                 </div>
 
                 <div className="register_form-filed">
                     <label className="register_form-filed-input-title">Пароль</label>
-                    <input type="password"
+
+                    <input
+                        type="password"
+                        name="password"
                         placeholder=""
                         className={`register_form-filed-input ${errors.password && 'register_form-filed-input_failed-validation'}`}
                         minLength="2" maxLength="30" id={`profile-password-input`}
                         required
                         onChange={handleChange}
                         value={values.password || ''} />
+
                     {errors.password &&
                         <span className="register_form-filed-input-error">{errors.password || ''}</span>}
                 </div>
 
                 <div className="register_form-submit__item">
                     <span className="register_form-filed-input-error"></span>
-                    <button type="submit" className={`register_form-submit ${!isValid && 'register_form-submit_login'}`} disabled={!isValid}>
+                    <button type="submit" className={`register_form-submit ${reqValidate && 'register_form-submit_disabled'}`} disabled={!isValid}>
                         Войти
                     </button>
                 </div>

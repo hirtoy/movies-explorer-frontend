@@ -72,7 +72,7 @@
   }
 }
 
-.movie-list__like-button {
+.movie__like-button {
   border-radius: 30px;
   width: 100px;
   height: 29px;
@@ -80,18 +80,18 @@
   cursor: pointer;
 }
 
-.movie-list__like-button-item {
+.movie__like-button-item {
   min-height: 65px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.movie-list__like-button:hover {
+.movie__like-button:hover {
   opacity: 0.6;
 }
 
-.movie-list__like-button-unliked {
+.movie__like-button-unliked {
   background: #313131;
   font-weight: 400;
   font-size: 12px;
@@ -99,10 +99,10 @@
   color: #fff;
 }
 
-.movie-list__like-button-liked {
+.movie__like-button-liked {
   background: #ee3465 no-repeat center url(../../../images/ok.png);
 }
 
-.movie-list__like-button-delete {
+.movie__like-button-delete {
   background: #313131 no-repeat center url(../../../images/delete.svg);
 }

@@ -19,11 +19,6 @@ import RedirectPage from '../RedirectPage/RedirectPage';
 import ProtectedRoute from '../Route/ProtectedRoute'
 import { mainApi } from '../../Api/MainApi';
 import { moviesApi } from '../../Api/MoviesApi';
-// import MoviesCard from '../Movies/MoviesCard/MoviesCard';
-// import Profile from '../Profile/Profile';
-// import SearchForm from '../Movies/SearchForm/SearchForm';
-// import Movies from '../Movies/Movies';
-// import Footer from '../Footer/Footer';
 
 export default function App() {
     const [sortingMovies, setSortingMovieState] = useState([]);
@@ -51,7 +46,7 @@ export default function App() {
     const clearStorage = () => {
         localStorage.removeItem('allMovies');
         localStorage.removeItem('sortingMovies');
-        localStorage.removeItem('isRenderedMovies');
+        localStorage.removeItem('isRenderMovies');
         localStorage.removeItem('searchRequest');
         localStorage.removeItem('shortFilms');
     }
@@ -79,16 +74,6 @@ export default function App() {
         }
     }, []);
 
-    // React.useEffect(() => {
-    //     api.getInitialCards()
-    //         .then((moviesData) => {
-    //             setMovieState(moviesData);
-    //         })
-    //         .catch((err) => {
-    //             console.log(err);
-    //         });
-    // }, []);
-
     //кол-во фильмов в зависимости от экрана
     React.useEffect(() => {
         setWindows(getWindow(window.innerWidth));
@@ -99,8 +84,8 @@ export default function App() {
         if (localStorage.getItem('sortingMovies')) {
             setSortingMovieState(JSON.parse(localStorage.getItem('sortingMovies')));
         }
-        if (localStorage.getItem('isRenderedMovies')) {
-            setIsRenderMoviesState(JSON.parse(localStorage.getItem('isRenderedMovies')));
+        if (localStorage.getItem('isRenderMovies')) {
+            setIsRenderMoviesState(JSON.parse(localStorage.getItem('isRenderMovies')));
         }
     }, []);
 
@@ -108,7 +93,7 @@ export default function App() {
         localStorage.setItem('sortingMovies', JSON.stringify(sortingMovies));
         setSortingMovieState(sortingMovies);
 
-        localStorage.setItem('isRenderedMovies', JSON.stringify(sortingMovies.slice(0, isRenderCount)));
+        localStorage.setItem('isRenderMovies', JSON.stringify(sortingMovies.slice(0, isRenderCount)));
         setIsRenderMoviesState(sortingMovies.slice(0, isRenderCount));
         sortingMovies.length === 0 ? setIsNotFoundState(true) : setIsNotFoundState(false);
     }
@@ -116,22 +101,24 @@ export default function App() {
     const handleSearchMovies = (formData) => {
         setSortingMovieState([]);
         setIsServerError(false);
-        if (localStorage.getItem('allMovies')) {
-            const allMoviesLocal = JSON.parse(localStorage.getItem('allMovies'));
-            const sortingMovies = allMoviesLocal.filter(function (movie) {
-                return isFound(movie, formData);
-            });
-            setIsRenderMovies(sortingMovies);
-        } else {
-            if (loggedIn) {
-                setIsLoading(true);
-                moviesApi.getAll().then((moviesData) => {
+        if (loggedIn) {
+            setIsLoading(true);
+            moviesApi.getAll()
+                .then((moviesData) => {
                     localStorage.setItem('allMovies', JSON.stringify(moviesData));
                     const sortingMovies = moviesData.filter(function (movie) {
                         return isFound(movie, formData);
                     });
                     setIsRenderMovies(sortingMovies);
-                })
+
+                });
+        } else {
+            if (localStorage.getItem('allMovies')) {
+                const allMoviesLocal = JSON.parse(localStorage.getItem('allMovies'));
+                const sortingMovies = allMoviesLocal.filter(function (movie) {
+                    return isFound(movie, formData);
+                });
+                setIsRenderMovies(sortingMovies)
                     .catch((err) => {
                         console.log(err);
                         setIsServerError(true);
@@ -173,7 +160,7 @@ export default function App() {
             mainApi.deleteMovie(movie._id)
                 .then((movie) => {
                     setSavedMoviesState(savedMovies => savedMovies.filter((m) => m._id !== movie._id));
-                    setIsRenderMoviesState(JSON.parse(localStorage.getItem('isRenderedMovies')));
+                    setIsRenderMoviesState(JSON.parse(localStorage.getItem('isRenderMovies')));
                 })
                 .catch((err) => {
                     console.log(err);
@@ -185,7 +172,7 @@ export default function App() {
                 mainApi.deleteMovie(movieDB[0]._id)
                     .then((movie) => {
                         setSavedMoviesState(savedMovies => savedMovies.filter((m) => m._id !== movie._id));
-                        setIsRenderMoviesState(JSON.parse(localStorage.getItem('isRenderedMovies')));
+                        setIsRenderMoviesState(JSON.parse(localStorage.getItem('isRenderMovies')));
                     })
                     .catch((err) => {
                         console.log(err);
@@ -206,7 +193,7 @@ export default function App() {
                 })
                     .then((movie) => {
                         savedMovies.push(movie);
-                        setIsRenderMoviesState(JSON.parse(localStorage.getItem('isRenderedMovies')));
+                        setIsRenderMoviesState(JSON.parse(localStorage.getItem('isRenderMovies')));
                     })
                     .catch((err) => {
                         console.log(err);
@@ -214,6 +201,28 @@ export default function App() {
             }
         }
     };
+
+    const debounce = (fn, ms) => {
+        let timer;
+        return () => {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                timer = null;
+                fn.apply(this, arguments);
+            }, ms)
+        };
+    }
+
+    React.useEffect(() => {
+        const debouncedHandleResize = debounce(function handleResize() {
+            setWindows(getWindow(window.innerWidth));
+        }, 1000)
+        window.addEventListener('resize', debouncedHandleResize);
+
+        return () => {
+            window.removeEventListener('resize', debouncedHandleResize)
+        }
+    });
 
     const resMoviesCard = () => {
         setIsLoading(true);
@@ -350,7 +359,7 @@ export default function App() {
                 <NavTab onClose={closeMenuPopup}
                     isOpen={isOpenMenuPopup}
                     onLickClick={handleLinkClick} />
-            </div>
+            </div >
         </CurrentUserContext.Provider>
     );
 }

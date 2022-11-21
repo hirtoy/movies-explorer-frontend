@@ -2,11 +2,12 @@ import React from 'react';
 import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList';
 import './Movies.css';
 import { ERROR_NOT_FOUND, ERROR_SERVER } from '../../utils/Constants';
+import Preloader from '../Main/Preloader/Preloader';
 
 export default function Movies({ movies, isMovies, isLoading, isNotFound, isServerError, onMore, sortingMovies, like, savedMovies }) {
     return (
         <section className="movies">
-
+            {isLoading && <Preloader />}
             {!isLoading && isNotFound ?
                 <p className="movies__items-none">{ERROR_NOT_FOUND}</p> : ''}
 
@@ -22,7 +23,7 @@ export default function Movies({ movies, isMovies, isLoading, isNotFound, isServ
                 <div className="movies__more-item">
                     <button type="button" className="movies__more" onClick={onMore}>Ещё</button>
                 </div> : ''}
-                
+
         </section>
     )
 }

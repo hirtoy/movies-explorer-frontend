@@ -1,42 +1,26 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react';
-// import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-// import { useHistory } from "react-router-dom";
+import React, { useEffect, useContext } from 'react';
 import LoginHeader from '../Login/form/LoginHeader/LoginHeader';
 import LoginFooter from '../Login/form/LoginFooter/LoginFooter';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import useFormWithValidation from '../../utils/validateAutch';
 import './Register.css';
-import useFormWithValidation from '../../utils/validateAutch'
-// import LoginForm from '../Login/form/LoginForm/LoginForm';
-// import LoginSubmit from '../Login/form/LoginSubmit/LoginSubmit';
-// import '../Login/form/LoginFooter/LoginFooter.css';
-// import '../Login/form/LoginHeader/LoginHeader.css';
 
 export default function Register({ onRegister }) {
-    // const [message, setMessage] = useState('');
-    // const user = React.useContext(CurrentUserContext);
-    // const history = useHistory();
-
-
+    const currentUser = useContext(CurrentUserContext);
     const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
     function handleSubmit(e) {
         e.preventDefault();
         onRegister(values);
     }
-    // const { register, handleSubmit,
-    //     formState: { errors, isValid } } = useForm({ mode: "onChange" });
-    // const onSubmit = (data) => {
-    //     onRegister(data)
-    //         .catch((err) => {
-    //             console.log(err);
-    //             if (err === 'Ошибка: 409') {
-    //                 setMessage('Такой пользователь уже существует');
-    //             }
-    //         })
-    // }
 
     useEffect(() => {
-        resetForm();
-    }, [resetForm]);
+        if (currentUser) {
+            resetForm(currentUser, {}, true);
+        }
+    }, [currentUser, resetForm]);
+
+    const reqValidate = (!isValid || (currentUser.name === values.name && currentUser.email === values.email));
 
     return (
         <div className="register">
@@ -55,7 +39,8 @@ export default function Register({ onRegister }) {
                         required
                         value={values.name || ''}
                         pattern="^[A-Za-zА-Яа-яЁё /s -]+$" />
-                    {errors.name && <span className="register_form-filed-input-error">{errors.name.message}</span>}
+                    {errors.name && 
+                    <span className="register_form-filed-input-error">{errors.name || ''}</span>}
                 </div>
 
                 <div className="register_form-filed">
@@ -70,7 +55,7 @@ export default function Register({ onRegister }) {
                         required
                         value={values.email || ''} />
                     {errors.email &&
-                        <span className="register_form-filed-input-error">{errors.email.message}</span>}
+                        <span className="register_form-filed-input-error">{errors.email || ''}</span>}
                 </div>
 
                 <div className="register_form-filed">
@@ -85,12 +70,12 @@ export default function Register({ onRegister }) {
                         required
                         value={values.password || ''} />
                     {errors.password &&
-                        <span className="register_form-filed-input-error">{errors.password.message}</span>}
+                        <span className="register_form-filed-input-error">{errors.password || ''}</span>}
                 </div>
 
                 <div className="register_form-submit__item">
                     <span className="register_form-filed-input-error"></span>
-                    <button type="submit" className="register_form-submit" disabled={!isValid}>
+                    <button type="submit" className={`register_form-submit ${reqValidate && 'register_form-submit_disabled'}`} disabled={!isValid}>
                         Зарегистрироваться
                     </button>
                 </div>

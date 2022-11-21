@@ -45,10 +45,9 @@
   margin-left: 22px;
   font-weight: 400;
   font-size: 18px;
-  line-height: 20;
-  border: unset;
+  border: initial;
   outline: 0;
-  background-color: unset;
+  background-color: initial;
   color: #fff;
   width: 80%;
 }
@@ -126,23 +125,28 @@
   border-radius: 20px;
 }
 
-.searchform__checkbox-slider:before {
+.searchform__checkbox-slider::before {
   position: absolute;
   content: "";
   height: 16px;
   width: 16px;
   left: 2px;
   bottom: 2px;
-  background-color: #3ddc84;
+  background-color: #aaaaaa;
   -webkit-transition: 0.4s;
   transition: 0.4s;
   border-radius: 50%;
 }
 
-input:checked + .searchform__checkbox-slider:before {
+/* .searchform__checkbox-slider:checked::after {
+  background-color: #3ddc84;
+} */
+
+input:checked + .searchform__checkbox-slider::before {
   -webkit-transform: translateX(16px);
   -ms-transform: translateX(16px);
   transform: translateX(16px);
+  background-color: #3ddc84;
 }
 
 .searchform__checkbox-item {

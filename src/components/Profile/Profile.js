@@ -31,60 +31,62 @@ export default function Profile({ loggedIn, onSignOut, onUpdateUser }) {
 
     return (
         <div className="profile">
-            <h1 className="profile__title">{`Привет, ${currentUser.name || ''}!`}</h1>
             <form className="profile__form"
                 method="post"
                 name="profileForm"
                 noValidate
                 onSubmit={handleSubmit}>
+                <h1 className="profile__title">{`Привет, ${currentUser.name || ''}!`}</h1>
 
                 <div className="profile__form-input-item">
 
-                    <label className="profile__form-input-title">Имя</label>
+                    <label className="profile__form-input-label">
+                        <span className="profile__form-input-title">Имя </span>
 
-                    <input value={values.name || ''}
-                        onChange={handleChange}
-                        name="name"
-                        type="text"
-                        placeholder="Имя"
-                        className="profile__form-input"
-                        minLength="2"
-                        maxLength="30"
-                        id="profile-name-input"
-                        pattern="^[A-Za-zА-Яа-яЁё /s -]+$"
-                        required />
+                        <input value={values.name || ''}
+                            onChange={handleChange}
+                            name="name"
+                            type="text"
+                            placeholder="Имя"
+                            className="profile__form-input"
+                            minLength="2"
+                            maxLength="30"
+                            id="profile-name-input"
+                            pattern="^[A-Za-zА-Яа-яЁё /s -]+$"
+                            required />
+
+                        <span className="profile__form-input-error">{errors.name || ''}</span>
+                    </label>
+
+                    <span className="profile__form-line" />
+
+                    <label className="profile__form-input-label">
+                        <span className="profile__form-input-title">E-mail</span>
+                        <input onChange={handleChange}
+                            value={values.email || ''}
+                            name="email"
+                            type="email"
+                            placeholder="email"
+                            className="profile__form-input"
+                            minLength="2"
+                            maxLength="30"
+                            id="profile-email-input"
+                            required />
+
+                        <span className="profile__form-input-error">{errors.email || ''}</span>
+                    </label>
                 </div>
-                <span className="profile__form-input-error">{errors.name || ''}</span>
-
-                <span className="profile__form-line" />
-
-                <div className="profile__form-input-item">
-                    <span className="profile__form-input-title">E-mail</span>
-                    <input onChange={handleChange}
-                        value={values.email || ''}
-                        name="email"
-                        type="email"
-                        placeholder="email"
-                        className="profile__form-input"
-                        minLength="2"
-                        maxLength="30"
-                        id="profile-email-input"
-                        required />
-                </div>
-
-                <span className="profile__form-input-error">{errors.email || ''}</span>
 
                 <div className="profile__form-submit-item">
                     <button type="submit"
-                        className="profile__form-submit-btn"
+                        className= {`profile__form-submit-btn ${reqValidate ? 'profile__form-submit-btn_disabled' : ''}`}
                         disabled={reqValidate ? true : false}>
                         Редактировать
                     </button>
+                    <Link to="/logout" className="profile__logout" onClick={handleClick}>Выйти из аккаунта</Link>
                 </div>
 
             </form>
-
-            <Link to="/logout" className="profile__logout" onClick={handleClick}>Выйти из аккаунта</Link>
-        </div>
+        </div >
     )
 }
