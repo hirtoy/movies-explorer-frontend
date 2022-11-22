@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import useFormWithValidation from '../../../utils/validateAutch';
 import './SearchForm.css';
 
 export default function SearchForm({ searchMovies }) {
     const [searchRequest, setSearchRequest] = useState(localStorage.getItem('searchRequest') ?? '');
     const [shortFilms, setShortFilms] = useState(localStorage.getItem('shortFilms') ?? 0);
+    const { values, isValid } = useFormWithValidation();
+    const [message, setMessage] = useState('');
 
     function handleSearch() {
         searchMovies({
@@ -11,6 +14,7 @@ export default function SearchForm({ searchMovies }) {
             shortFilms: +shortFilms
         });
     }
+    
 
     function handleChangeRequest(e) {
         setSearchRequest(e.target.value);
@@ -23,8 +27,13 @@ export default function SearchForm({ searchMovies }) {
 
     function onSubmit(e) {
         e.preventDefault();
-        handleSearch();
-    }
+        isValid ? handleSearch(values.search) : setMessage('Нужно ввести ключевое слово.');
+      };
+
+    // function onSubmit(e) {
+    //     e.preventDefault();
+    //     handleSearch();
+    // }
 
     return (
         <section className="searchform">
@@ -39,6 +48,7 @@ export default function SearchForm({ searchMovies }) {
                     </input>
 
                     <button type="submit" className="searchform__input-submit" onClick={handleSearch}>Поиск</button>
+                    <span className="searchform__input-error">{message}</span>
 
                 </label>
 

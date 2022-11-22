@@ -155,10 +155,8 @@ export default function App() {
     };
 
     const handleLike = (movie, isSavedMoviesPage) => {
-        const isLiked = savedMovies.some(m => +m.movieId === movie.id);
-        if (isLiked) {
-            const movieDB = savedMovies.filter(m => +m.movieId === movie.id);
-            mainApi.deleteMovie(movieDB[0]._id)
+        if (isSavedMoviesPage) {
+            mainApi.deleteMovie(movie._id)
                 .then((movie) => {
                     setSavedMoviesState(savedMovies => savedMovies.filter((m) => m._id !== movie._id));
                     setIsRenderMoviesState(JSON.parse(localStorage.getItem('isRenderMovies')));
@@ -167,8 +165,10 @@ export default function App() {
                     console.log(err);
                 });
         } else {
-            if (isSavedMoviesPage) {
-                mainApi.deleteMovie(movie._id)
+            const isLiked = savedMovies.some(m => +m.movieId === movie.id);
+            if (isLiked) {
+                const movieDB = savedMovies.filter(m => +m.movieId === movie.id);
+                mainApi.deleteMovie(movieDB[0]._id)
                     .then((movie) => {
                         setSavedMoviesState(savedMovies => savedMovies.filter((m) => m._id !== movie._id));
                         setIsRenderMoviesState(JSON.parse(localStorage.getItem('isRenderMovies')));
@@ -200,6 +200,10 @@ export default function App() {
             }
         }
     };
+
+    function goBack() {
+        history.goBack();
+    }
 
     const resMoviesCard = () => {
         setIsLoading(true);
@@ -281,7 +285,7 @@ export default function App() {
                     </Route>
 
                     <ProtectedRoute path="/movies"
-                        loggedIn={localStorage.getItem('loggedIn') === 'true'}
+                         loggedIn={localStorage.getItem('loggedIn') === 'true'}
                         movies={isRenderMovies}
                         sortingMovies={sortingMovies}
                         savedMovies={savedMovies}
@@ -308,11 +312,21 @@ export default function App() {
                         resMoviesCard={resMoviesCard} />
 
                     <Route path="/signup">
-                        <Register onRegister={onRegister} errorMessage={errorMessage} />
+                        {!loggedIn ? (
+                            <Register onRegister={onRegister} />
+                        ) : (
+                            <Redirect to='/' />
+                        )}
+                        {/* <Register onRegister={onRegister} errorMessage={errorMessage} /> */}
                     </Route>
 
                     <Route path="/signin">
-                        <Login onLogin={onLogin} errorMessage={errorMessage} />
+                        {!loggedIn ? (
+                            <Login onLogin={onLogin} />
+                        ) : (
+                            <Redirect to='/' />
+                        )}
+                        {/* <Login onLogin={onLogin} errorMessage={errorMessage} /> */}
                     </Route>
 
                     <ProtectedRoute path="/profile"
@@ -320,16 +334,16 @@ export default function App() {
                         component={RedirectPage}
                         onMenuClick={handleClick}
                         onSignOut={onSignOut}
-                        onUpdateUser={handleUpdateUser}
+                        handleUpdateUser={handleUpdateUser}
                         errorMessage={errorMessage} />
 
-                    <Route path="/not-found">
-                        <ErrorNotFound />
+                    <Route path="*">
+                        <ErrorNotFound goBack={goBack} />
                     </Route>
 
-                    <Route path="/*">
+                    {/* <Route path="/*">
                         <Redirect to="/not-found" />
-                    </Route>
+                    </Route> */}
 
                 </Switch>
 

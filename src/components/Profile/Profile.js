@@ -5,7 +5,7 @@ import useFormWithValidation from '../../utils/validateAutch';
 import './Profile.css';
 
 // изменение профиля
-export default function Profile({ loggedIn, onSignOut, onUpdateUser }) {
+export default function Profile({ loggedIn, onSignOut, handleUpdateUser }) {
     const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
     const currentUser = useContext(CurrentUserContext);
     const [message, setMessage] = useState('');
@@ -19,7 +19,7 @@ export default function Profile({ loggedIn, onSignOut, onUpdateUser }) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        onUpdateUser(values)
+        handleUpdateUser(values)
         .then(() => {
             setMessage('Данные сохранены');
         })
@@ -32,7 +32,7 @@ export default function Profile({ loggedIn, onSignOut, onUpdateUser }) {
 
     useEffect(() => {
         if (currentUser) {
-            resetForm(currentUser, {}, true);
+            resetForm(currentUser, true);
         }
     }, [currentUser, resetForm]);
 

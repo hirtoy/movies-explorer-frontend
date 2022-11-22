@@ -59,6 +59,15 @@
   }
 }
 
+.searchform__input-error {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.2;
+  color: #ee3465;
+  position: absolute;
+  margin-top: 110px;
+}
+
 .searchform__input-submit {
   background: #4285f4;
   border-radius: 5px;
