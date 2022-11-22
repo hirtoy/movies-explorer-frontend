@@ -33,7 +33,7 @@ export default function MoviesCardList({ movie, isMovies, like, saved }) {
 
                 <img className="movie-list__image"
                     alt={movie.nameRU}
-                    src={movie.image.url ? `${IMAGE_URL}${movie.image.url}` : movie.image} />
+                    src={movie.image.url ? `${IMAGE_URL}${movie.image.url}` : movie.image}/>
             </a>
 
             <div className="movie__like-button-item">

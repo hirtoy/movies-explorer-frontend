@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useFormWithValidation from '../../../utils/validateAutch';
 import './SearchForm.css';
 
 export default function SearchForm({ searchMovies }) {
     const [searchRequest, setSearchRequest] = useState(localStorage.getItem('searchRequest') ?? '');
     const [shortFilms, setShortFilms] = useState(localStorage.getItem('shortFilms') ?? 0);
-    const { values, isValid } = useFormWithValidation();
+    const { values, isValid, handleChange } = useFormWithValidation();
     const [message, setMessage] = useState('');
 
     function handleSearch() {
@@ -14,7 +14,7 @@ export default function SearchForm({ searchMovies }) {
             shortFilms: +shortFilms
         });
     }
-    
+
 
     function handleChangeRequest(e) {
         setSearchRequest(e.target.value);
@@ -28,7 +28,10 @@ export default function SearchForm({ searchMovies }) {
     function onSubmit(e) {
         e.preventDefault();
         isValid ? handleSearch(values.search) : setMessage('Нужно ввести ключевое слово.');
-      };
+    };
+    useEffect(() => {
+        setMessage('')
+    }, [isValid]);
 
     // function onSubmit(e) {
     //     e.preventDefault();
@@ -37,17 +40,20 @@ export default function SearchForm({ searchMovies }) {
 
     return (
         <section className="searchform">
-            <form className="searchform__items" onSubmit={onSubmit}>
+            <form className="searchform__items" name="search" onSubmit={onSubmit}>
                 <label className="searchform__input-item">
-                    <input type="text"
+                    <input
+                        name="search"
+                        type="text"
                         className="searchform__input"
                         placeholder="Фильм"
                         required
+                        autoComplete="off"
                         onChange={handleChangeRequest}
                         value={searchRequest || ''}>
                     </input>
 
-                    <button type="submit" className="searchform__input-submit" onClick={handleSearch}>Поиск</button>
+                    <button type="submit" className="searchform__input-submit" onClick={handleChange}>Поиск</button>
                     <span className="searchform__input-error">{message}</span>
 
                 </label>
@@ -58,7 +64,7 @@ export default function SearchForm({ searchMovies }) {
                         <input type="checkbox" value={shortFilms || 0} onClick={handleSearch} onChange={handleChangeFilms} checked={Boolean(+shortFilms)} />
                         <span className="searchform__checkbox-slider"></span>
                     </label>
-                    
+
                     <p className="searchform__checkbox-title">Короткометражки</p>
                 </div>
             </form>

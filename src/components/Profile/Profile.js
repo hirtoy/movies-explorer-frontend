@@ -32,7 +32,7 @@ export default function Profile({ loggedIn, onSignOut, handleUpdateUser }) {
 
     useEffect(() => {
         if (currentUser) {
-            resetForm(currentUser, true);
+            resetForm(currentUser, {}, true);
         }
     }, [currentUser, resetForm]);
 
@@ -52,7 +52,7 @@ export default function Profile({ loggedIn, onSignOut, handleUpdateUser }) {
                     <label className="profile__form-input-label">
                         <span className="profile__form-input-title">Имя </span>
 
-                        <input value={values.name || ''}
+                        <input defaultValue={values.name}
                             onChange={handleChange}
                             name="name"
                             type="text"
@@ -72,7 +72,7 @@ export default function Profile({ loggedIn, onSignOut, handleUpdateUser }) {
                     <label className="profile__form-input-label">
                         <span className="profile__form-input-title">E-mail</span>
                         <input onChange={handleChange}
-                            value={values.email || ''}
+                            defaultValue={values.email}
                             name="email"
                             type="email"
                             placeholder="email"
