@@ -3,10 +3,10 @@ import useFormWithValidation from '../../../utils/validateAutch';
 // import { CurrentUserContext } from '../../../contexts/CurrentUserContext';
 import './SearchForm.css';
 
-export default function SearchForm({ searchMovies }) {
+export default function SearchForm({ searchMovies,  }) {
     const [searchRequest, setSearchRequest] = useState(localStorage.getItem('searchRequest') ?? '');
     const [shortFilms, setShortFilms] = useState(localStorage.getItem('shortFilms') ?? 0);
-    const { values, handleChange, isValid } = useFormWithValidation();
+    const { handleChange, isValid } = useFormWithValidation();
     // const currentUser = useContext(CurrentUserContext);
 
     const [message, setMessage] = useState('');
@@ -28,10 +28,19 @@ export default function SearchForm({ searchMovies }) {
         localStorage.setItem('shortFilms', +e.target.checked);
     }
 
+    // function onSubmit(e) {
+    //     e.preventDefault();
+    //     isValid ? values(values.search) : setMessage('Нужно ввести ключевое слово.');
+    // };
+
     function onSubmit(e) {
         e.preventDefault();
-        isValid ? handleSearch(values.search) : setMessage('Нужно ввести ключевое слово.');
-    };
+        if (searchRequest === '') {
+            setMessage('Нужно ввести ключевое слово');
+        } else {
+            handleSearch(searchRequest);
+        }
+      }
 
     useEffect(() => {
         setMessage('')
@@ -54,7 +63,7 @@ export default function SearchForm({ searchMovies }) {
                         autoComplete="off"
                         required
                         onChange={handleChangeRequest}
-                        value={searchRequest || ''}>
+                        defaultValue={searchRequest || ''}>
                     </input>
                     <span className="searchform__input-error">{message}</span>
                     <button type="submit" className="searchform__input-submit" onChange={handleChange} onClick={handleSearch} >Поиск</button>

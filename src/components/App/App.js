@@ -130,14 +130,16 @@ export default function App() {
     }
 
     const handleSearchUserMovies = (formData) => {
+        console.log('dfdf');
         setIsLoading(true);
         setIsServerError(false);
-        mainApi.getUserMovies().then((moviesData) => {
-            const sortingMovies = moviesData.filter(function (movie) {
-                return isFound(movie, formData);
-            });
-            setSavedMoviesState(sortingMovies);
-        })
+        mainApi.getUserMovies()
+            .then((moviesData) => {
+                const sortingMovies = moviesData.filter(function (movie) {
+                    return isFound(movie, formData);
+                });
+                setSavedMoviesState(sortingMovies);
+            })
             .catch((err) => {
                 console.log(err);
                 setIsServerError(true);
@@ -285,7 +287,7 @@ export default function App() {
                     </Route>
 
                     <ProtectedRoute path="/movies"
-                         loggedIn={localStorage.getItem('loggedIn') === 'true'}
+                        loggedIn={localStorage.getItem('loggedIn') === 'true'}
                         movies={isRenderMovies}
                         sortingMovies={sortingMovies}
                         savedMovies={savedMovies}
