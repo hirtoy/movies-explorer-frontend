@@ -43,17 +43,17 @@ export default function SearchForm({ searchMovies }) {
             <form className="searchform__items" name="search" onSubmit={onSubmit}>
                 <label className="searchform__input-item">
                     <input
+                    
                         name="search"
                         type="text"
                         className="searchform__input"
                         placeholder="Фильм"
-                        required
                         autoComplete="off"
                         onChange={handleChangeRequest}
                         value={searchRequest || ''}>
                     </input>
 
-                    <button type="submit" className="searchform__input-submit" onClick={handleChange}>Поиск</button>
+                    <button type="button" className="searchform__input-submit" onChange={handleChange} onClick={handleSearch} >Поиск</button>
                     <span className="searchform__input-error">{message}</span>
 
                 </label>

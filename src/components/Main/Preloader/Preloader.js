@@ -1,7 +1,7 @@
 import './Preloader';
 import React from 'react'
 
-export default function Preloader() {
+const Preloader = () => {
   return (
         <div className="preloader">
         <div className="preloader__container">
@@ -9,4 +9,6 @@ export default function Preloader() {
         </div>
     </div>
   );
-}
+};
+
+export default Preloader
