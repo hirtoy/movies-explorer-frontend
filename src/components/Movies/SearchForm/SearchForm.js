@@ -35,11 +35,7 @@ export default function SearchForm({ searchMovies,  }) {
 
     function onSubmit(e) {
         e.preventDefault();
-        if (searchRequest === '') {
-            setMessage('Нужно ввести ключевое слово');
-        } else {
-            handleSearch(searchRequest);
-        }
+        handleSearch(searchRequest);
       }
 
     useEffect(() => {
@@ -73,7 +69,7 @@ export default function SearchForm({ searchMovies,  }) {
                 <div className="searchform__checkbox-group">
 
                     <label className="searchform__checkbox-item">
-                        <input type="checkbox" value={shortFilms || 0} onClick={handleSearch} onChange={handleChangeFilms} checked={Boolean(+shortFilms)} />
+                        <input type="checkbox" value={shortFilms || 0} onChange={handleChangeFilms} checked={Boolean(+shortFilms)} />
                         <span className="searchform__checkbox-slider"></span>
                     </label>
 

@@ -98,6 +98,7 @@ export default function App() {
         sortingMovies.length === 0 ? setIsNotFoundState(true) : setIsNotFoundState(false);
     }
 
+
     const handleSearchMovies = (formData) => {
         setSortingMovieState([]);
         setIsServerError(false);
@@ -130,7 +131,6 @@ export default function App() {
     }
 
     const handleSearchUserMovies = (formData) => {
-        console.log('dfdf');
         setIsLoading(true);
         setIsServerError(false);
         mainApi.getUserMovies()
@@ -288,6 +288,7 @@ export default function App() {
 
                     <ProtectedRoute path="/movies"
                         loggedIn={localStorage.getItem('loggedIn') === 'true'}
+                        searchError={errorMessage}
                         movies={isRenderMovies}
                         sortingMovies={sortingMovies}
                         savedMovies={savedMovies}
