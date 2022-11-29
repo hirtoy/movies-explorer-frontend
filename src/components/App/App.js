@@ -81,6 +81,28 @@ export default function App() {
     }, []);
 
     React.useEffect(() => {
+        const debouncedHandle = debounce(function handleResize() {
+            setWindows(getWindow(window.innerWidth));
+        }, 1000)
+        window.addEventListener('resize', debouncedHandle);
+
+        return () => {
+            window.removeEventListener('resize', debouncedHandle)
+        }
+    });
+
+    const debounce = (fn, ms) => {
+        let timer;
+        return () => {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                timer = null;
+                fn.apply(this, arguments);
+            }, ms)
+        };
+    }
+
+    React.useEffect(() => {
         if (localStorage.getItem('sortingMovies')) {
             setSortingMovieState(JSON.parse(localStorage.getItem('sortingMovies')));
         }
@@ -90,12 +112,13 @@ export default function App() {
     }, []);
 
     const setIsRenderMovies = (sortingMovies) => {
+
+        sortingMovies.length === 0 ? setIsNotFoundState(true) : setIsNotFoundState(false);
         localStorage.setItem('sortingMovies', JSON.stringify(sortingMovies));
         setSortingMovieState(sortingMovies);
 
         localStorage.setItem('isRenderMovies', JSON.stringify(sortingMovies.slice(0, isRenderCount)));
         setIsRenderMoviesState(sortingMovies.slice(0, isRenderCount));
-        sortingMovies.length === 0 ? setIsNotFoundState(true) : setIsNotFoundState(false);
     }
 
 
@@ -104,30 +127,31 @@ export default function App() {
         setIsServerError(false);
         if (localStorage.getItem('allMovies')) {
             const allMoviesLocal = JSON.parse(localStorage.getItem('allMovies'));
-            const sortingMovies = allMoviesLocal.filter(function (movie) {
-                return isFound(movie, formData);
-            });
+            const sortingMovies = allMoviesLocal
+                .filter(function (movie) {
+                    return isFound(movie, formData);
+                });
             setIsRenderMovies(sortingMovies);
-        } else {
-            if (loggedIn) {
-                setIsLoading(true);
-                moviesApi.getAll()
-                    .then((moviesData) => {
-                        localStorage.setItem('allMovies', JSON.stringify(moviesData));
-                        const sortingMovies = moviesData.filter(function (movie) {
-                            return isFound(movie, formData);
-                        });
-                        setIsRenderMovies(sortingMovies);
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                        setIsServerError(true);
-                    })
-                    .finally(() => {
-                        setIsLoading(false);
-                    });
-            }
         }
+        if (loggedIn) {
+            setIsLoading(true);
+            moviesApi.getAll()
+                .then((moviesData) => {
+                    localStorage.setItem('allMovies', JSON.stringify(moviesData));
+                    const sortingMovies = moviesData.filter(function (movie) {
+                        return isFound(movie, formData);
+                    });
+                    setIsRenderMovies(sortingMovies);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    setIsServerError(true);
+                })
+                .finally(() => {
+                    setIsLoading(false);
+                });
+        }
+
     }
 
     const handleSearchUserMovies = (formData) => {
@@ -320,7 +344,6 @@ export default function App() {
                         ) : (
                             <Redirect to='/' />
                         )}
-                        {/* <Register onRegister={onRegister} errorMessage={errorMessage} /> */}
                     </Route>
 
                     <Route path="/signin">
@@ -329,7 +352,6 @@ export default function App() {
                         ) : (
                             <Redirect to='/' />
                         )}
-                        {/* <Login onLogin={onLogin} errorMessage={errorMessage} /> */}
                     </Route>
 
                     <ProtectedRoute path="/profile"
@@ -343,10 +365,6 @@ export default function App() {
                     <Route path="*">
                         <ErrorNotFound goBack={goBack} />
                     </Route>
-
-                    {/* <Route path="/*">
-                        <Redirect to="/not-found" />
-                    </Route> */}
 
                 </Switch>
 

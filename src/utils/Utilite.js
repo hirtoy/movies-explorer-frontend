@@ -21,9 +21,9 @@ const isFoundDuration = (movie, formData) => {
 
 export const isFound = (movie, formData) => {
     if (formData.shortFilms) {
-        return isFoundShortDuration(movie, formData);
-    } else {
         return isFoundDuration(movie, formData);
+    } else {
+        return isFoundShortDuration(movie, formData);
     }
 }
 

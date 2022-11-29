@@ -18,7 +18,8 @@ export default function MoviesPages({ loggedIn, movies, isMovies, onMenuClick, i
         <>
             <Header loggedIn={loggedIn} onMenuClick={onMenuClick} />
             <main>
-                <SearchMoviesPage searchMovies={searchMovies} />
+                <SearchMoviesPage
+                searchMovies={searchMovies} />
                 
                 <MoviesCard
                     movies={movies}

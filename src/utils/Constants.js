@@ -5,6 +5,7 @@ export const MOBAL_WIDTH = 768;
 
 export const ERROR_SERVER = 'Во время запроса произошла ошибка. Попробуйте ещё раз';
 export const ERROR_NOT_FOUND = 'Ничего не найдено';
+export const ERROR_REQUEST = 'Необходимо ввести фразу для поиска';
 export const USER_OK = 'Данные изменены';
 export const MOVIES_CARD = {
     desktop: {count: 12, more: 3},
