@@ -1,12 +1,11 @@
 import { Link, useHistory } from 'react-router-dom';
-import React from 'react';
+import React, {useContext} from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import '../Header/Header.css';
 
 export default function Auth({ loggedIn, onMenuClick }) {
     const history = useHistory();
-
-    const user = React.useContext(CurrentUserContext);
+    const currentUser = useContext(CurrentUserContext);
 
     const handleLoginClick = () => {
         history.push('/signin');
@@ -16,6 +15,7 @@ export default function Auth({ loggedIn, onMenuClick }) {
         e.preventDefault();
         onMenuClick();
     }
+    
 
     return (
         <div className="header__profile-links">
@@ -26,7 +26,7 @@ export default function Auth({ loggedIn, onMenuClick }) {
 
             {loggedIn &&
                 <Link to="/profile" className="header__profile header__profile-none">
-                    <span className="header__profile-name">{user ? user.email : 'Аккаунт'}</span>
+                    <span className="header__profile-name">{currentUser ? currentUser.email : 'Аккаунт'}</span>
                     <div className="header__profile-logo"></div>
                 </Link>
             }

@@ -20,13 +20,13 @@ export default function Profile({ loggedIn, onSignOut, handleUpdateUser }) {
     function handleSubmit(e) {
         e.preventDefault();
         handleUpdateUser(values)
-        .then(() => {
-            setMessage('Данные сохранены');
-        })
-        .catch((err) => {
-            console.log(err);
-            setMessage('Ошибка сохранения данных');
-        });
+            .then(() => {
+                setMessage('Данные сохранены');
+            })
+            .catch((err) => {
+                console.log(err);
+                setMessage('Ошибка сохранения данных');
+            });
         setTimeout(() => setMessage(''), 3000);
     }
 
@@ -87,9 +87,9 @@ export default function Profile({ loggedIn, onSignOut, handleUpdateUser }) {
                 </div>
 
                 <div className="profile__form-submit-item">
-                <span className="profile__form-input-message">{message}</span>
+                    <span className="profile__form-input-message">{message}</span>
                     <button type="submit"
-                        className= {`profile__form-submit-btn ${reqValidate ? 'profile__form-submit-btn_disabled' : ''}`}
+                        className={`profile__form-submit-btn ${reqValidate ? 'profile__form-submit-btn_disabled' : ''}`}
                         disabled={reqValidate ? true : false}>
                         Редактировать
                     </button>

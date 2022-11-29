@@ -359,7 +359,7 @@ export default function App() {
                         component={RedirectPage}
                         onMenuClick={handleClick}
                         onSignOut={onSignOut}
-                        handleUpdateUser={handleUpdateUser}
+                        onUpdateUser={handleUpdateUser}
                         errorMessage={errorMessage} />
 
                     <Route path="*">
