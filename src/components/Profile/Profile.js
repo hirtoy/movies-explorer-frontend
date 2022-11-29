@@ -45,7 +45,7 @@ export default function Profile({ loggedIn, onSignOut, handleUpdateUser }) {
                 name="profileForm"
                 noValidate
                 onSubmit={handleSubmit}>
-                <h1 className="profile__title">{`Привет, ${currentUser.name || ''}!`}</h1>
+                <h1 className="profile__title">{`Привет, ${values.name || ''}!`}</h1>
 
                 <div className="profile__form-input-item">
 

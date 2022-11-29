@@ -247,8 +247,8 @@ export default function App() {
     }
 
     //редактор пользователя
-    const handleUpdateUser = (formData) => {
-        return mainApi.setUserData(formData)
+    const handleUpdateUser = ({ name, email }) => {
+        return mainApi.setUserData(name, email)
             .then((userData) => {
                 setCurrentUser(userData);
             });
