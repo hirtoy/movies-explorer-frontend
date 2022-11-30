@@ -134,6 +134,25 @@ export default function App() {
         }
     }
 
+    const handleSearchUserShort = (formData) => {
+        setIsLoading(true);
+        setIsServerError(false);
+        mainApi.getUserMovies()
+            .then((moviesData) => {
+                const sortingMovies = moviesData.filter(function (movie) {
+                    return isFoundShort(movie, formData);
+                })
+                setSavedMoviesState(sortingMovies);
+            })
+            .catch((err) => {
+                console.log(err);
+                setIsServerError(true);
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
+    }
+
 
 
     const handleSearchMovies = (formData) => {
@@ -349,6 +368,7 @@ export default function App() {
                         component={MoviesPages}
                         isLoading={isLoading}
                         onMenuClick={handleClick}
+                        searchMoviesUserShort={handleSearchUserShort}
                         searchMovies={handleSearchUserMovies}
                         like={handleLike}
                         resMoviesCard={resMoviesCard} />

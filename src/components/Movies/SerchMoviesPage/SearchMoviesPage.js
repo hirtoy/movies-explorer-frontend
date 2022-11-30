@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../SearchForm/SearchForm.css';
 
-export default function SearchMoviesPage({ searchMovies }) {
+export default function SearchMoviesPage({ searchMovies, searchMoviesUserShort }) {
     const [searchRequest, setSearchRequest] = useState('');
     const [shortFilms, setShortFilms] = useState(0);
 
@@ -18,6 +18,13 @@ export default function SearchMoviesPage({ searchMovies }) {
             searchRequest,
             shortFilms: +shortFilms
         });
+    }
+
+    function handleShort() {
+        searchMoviesUserShort({
+            shortFilms: +shortFilms,
+            searchRequest
+        })
     }
 
     function onSubmit(e) {
@@ -46,7 +53,7 @@ export default function SearchMoviesPage({ searchMovies }) {
                     <label className="searchform__checkbox-item">
                         <input
                             value={shortFilms || 0}
-                            onClick={handleSearch}
+                            onClick={handleShort}
                             onChange={handleChangeFilms}
                             type="checkbox"
                             className="searchform__checkbox"
