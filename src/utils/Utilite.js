@@ -1,4 +1,4 @@
-import {DESKTOP_WIDTH, MOVIES_CARD, SHORT_DURATION, MOBAL_WIDTH} from './Constants';
+import { DESKTOP_WIDTH, MOVIES_CARD, SHORT_DURATION, MOBAL_WIDTH } from './Constants';
 
 const isNameFound = (movie, name, formData) => {
     return movie[name].toLowerCase().includes(formData.searchRequest.toLowerCase());
@@ -21,11 +21,20 @@ const isFoundDuration = (movie, formData) => {
 
 export const isFound = (movie, formData) => {
     if (formData.shortFilms) {
+        return isFoundShortDuration(movie, formData);
+    } else {
+        return isFoundDuration(movie, formData);
+    }
+}
+
+export const isFoundShort = (movie, formData) => {
+    if (formData.shortFilms) {
         return isFoundDuration(movie, formData);
     } else {
         return isFoundShortDuration(movie, formData);
     }
 }
+
 
 export const getWindow = (width) => {
     let window;
@@ -43,7 +52,7 @@ export const getWindow = (width) => {
 
 export const getDuration = (duration) => {
     const hours = Math.floor(duration / 60);
-  const minutes = duration % 60;
+    const minutes = duration % 60;
 
-  return hours ? `${hours}ч ${minutes}м` : `${minutes}м`;
+    return hours ? `${hours}ч ${minutes}м` : `${minutes}м`;
 };

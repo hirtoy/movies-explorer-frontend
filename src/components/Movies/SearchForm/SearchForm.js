@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+// import { isFoundShort } from '../../../utils/Utilite';
 import useFormWithValidation from '../../../utils/validateAutch';
 import './SearchForm.css';
 
-export default function SearchForm({ searchMovies }) {
+export default function SearchForm({ searchMovies, searchMoviesShort }) {
     const [searchRequest, setSearchRequest] = useState(localStorage.getItem('searchRequest') ?? '');
     const [shortFilms, setShortFilms] = useState(localStorage.getItem('shortFilms') ?? false);
     const { handleChange, isValid } = useFormWithValidation();
@@ -14,6 +15,13 @@ export default function SearchForm({ searchMovies }) {
             shortFilms: +shortFilms,
             searchRequest
         });
+    }
+
+    function handleShort() {
+        searchMoviesShort({
+            shortFilms: +shortFilms,
+            searchRequest
+        })
     }
 
     function handleChangeFilms(e) {
@@ -28,7 +36,7 @@ export default function SearchForm({ searchMovies }) {
 
     function onSubmit(e) {
         e.preventDefault();
-        handleSearch(handleChangeFilms);
+        handleSearch(handleChangeRequest);
     }
 
     useEffect(() => {
@@ -51,7 +59,7 @@ export default function SearchForm({ searchMovies }) {
                         defaultValue={searchRequest || ''}>
                     </input>
                     <span className="searchform__input-error">{message}</span>
-                    <button type="submit" className="searchform__input-submit" onChange={handleChange}>Поиск</button>
+                    <button type="submit" className="searchform__input-submit"  onChange={handleChange}>Поиск</button>
 
                 </label>
 
@@ -61,7 +69,7 @@ export default function SearchForm({ searchMovies }) {
                         <input
                             type="checkbox"
                             value={shortFilms || 0}
-                            onClick={handleSearch}
+                            onClick={handleShort}
                             onChange={handleChangeFilms}
                             checked={Boolean(+shortFilms)} />
                         <span className="searchform__checkbox-slider"></span>

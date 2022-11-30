@@ -15,6 +15,7 @@ export default function MoviesPage({
     onMenuClick,
     isLoading,
     searchMovies,
+    searchMoviesShort,
     isNotFound,
     isServerError,
     onMore,
@@ -31,7 +32,9 @@ export default function MoviesPage({
         <>
             <Header loggedIn={loggedIn} onMenuClick={onMenuClick} />
             <main>
-                <SearchForm searchMovies={searchMovies} />
+                <SearchForm 
+                searchMoviesShort={searchMoviesShort}
+                searchMovies={searchMovies} />
                 <Movies
                     movies={movies}
                     sortingMovies={sortingMovies}

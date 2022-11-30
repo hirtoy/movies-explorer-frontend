@@ -1,6 +1,6 @@
 import '../../index.css';
 import './App.css';
-import { getWindow, isFound } from "../../utils/Utilite";
+import { getWindow, isFound, isFoundShort } from "../../utils/Utilite";
 import { IMAGE_URL } from '../../utils/Constants';
 import { Redirect, Switch, Route, useHistory } from 'react-router-dom';
 import { useState } from 'react';
@@ -121,6 +121,20 @@ export default function App() {
         setIsRenderMoviesState(sortingMovies.slice(0, isRenderCount));
     }
 
+    const handleSearchMoviesShort = (formData) => {
+        setSortingMovieState([]);
+        setIsServerError(false);
+        if (localStorage.getItem('allMovies')) {
+            const allMoviesLocal = JSON.parse(localStorage.getItem('allMovies'));
+            const sortingMovies = allMoviesLocal
+                .filter(function (movie) {
+                    return isFoundShort(movie, formData);
+                })
+            setIsRenderMovies(sortingMovies)
+        }
+    }
+
+
 
     const handleSearchMovies = (formData) => {
         setSortingMovieState([]);
@@ -130,7 +144,7 @@ export default function App() {
             const sortingMovies = allMoviesLocal
                 .filter(function (movie) {
                     return isFound(movie, formData);
-                });
+                })
             setIsRenderMovies(sortingMovies);
         }
         if (loggedIn) {
@@ -140,7 +154,7 @@ export default function App() {
                     localStorage.setItem('allMovies', JSON.stringify(moviesData));
                     const sortingMovies = moviesData.filter(function (movie) {
                         return isFound(movie, formData);
-                    });
+                    })
                     setIsRenderMovies(sortingMovies);
                 })
                 .catch((err) => {
@@ -161,7 +175,7 @@ export default function App() {
             .then((moviesData) => {
                 const sortingMovies = moviesData.filter(function (movie) {
                     return isFound(movie, formData);
-                });
+                })
                 setSavedMoviesState(sortingMovies);
             })
             .catch((err) => {
@@ -320,6 +334,7 @@ export default function App() {
                         component={MoviesPage}
                         isLoading={isLoading}
                         onMenuClick={handleClick}
+                        searchMoviesShort={handleSearchMoviesShort}
                         searchMovies={handleSearchMovies}
                         isNotFound={isNotFound}
                         isServerError={isServerError}

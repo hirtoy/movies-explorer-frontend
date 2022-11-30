@@ -6,7 +6,7 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import SearchMoviesPage from '../SerchMoviesPage/SearchMoviesPage';
 import { useLocation } from 'react-router-dom';
 
-export default function MoviesPages({ loggedIn, movies, isMovies, onMenuClick, isLoading, searchMovies, like, resMoviesCard }) {
+export default function MoviesPages({ loggedIn, movies, isMovies, onMenuClick, isLoading, searchMovies,searchMoviesShort, like, resMoviesCard }) {
 
     const location = useLocation();
 
@@ -19,6 +19,7 @@ export default function MoviesPages({ loggedIn, movies, isMovies, onMenuClick, i
             <Header loggedIn={loggedIn} onMenuClick={onMenuClick} />
             <main>
                 <SearchMoviesPage
+                searchMoviesShort={searchMoviesShort}
                 searchMovies={searchMovies} />
                 
                 <MoviesCard
